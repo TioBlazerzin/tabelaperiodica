@@ -1,4 +1,4 @@
-// Detecção de dispositivo - DEFINIR PRIMEIRO!
+// Detecção de dispositivo
 function detectDevice() {
     const ua = navigator.userAgent;
     const mobileKeywords = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone'];
@@ -7,20 +7,17 @@ function detectDevice() {
     let os = 'unknown';
     let browser = 'unknown';
     
-    // Detectar sistema operacional
     if (ua.indexOf('Win') !== -1) os = 'Windows';
     else if (ua.indexOf('Mac') !== -1) os = 'MacOS';
     else if (ua.indexOf('Linux') !== -1) os = 'Linux';
     else if (ua.indexOf('Android') !== -1) os = 'Android';
     else if (ua.indexOf('iPhone') !== -1 || ua.indexOf('iPad') !== -1) os = 'iOS';
     
-    // Detectar navegador
     if (ua.indexOf('Chrome') !== -1) browser = 'Chrome';
     else if (ua.indexOf('Firefox') !== -1) browser = 'Firefox';
     else if (ua.indexOf('Safari') !== -1) browser = 'Safari';
     else if (ua.indexOf('Edge') !== -1) browser = 'Edge';
     
-    // Detectar se é mobile
     const isMobile = mobileKeywords.some(keyword => ua.indexOf(keyword) !== -1) || window.innerWidth <= 768;
     
     if (isMobile) {
@@ -32,17 +29,15 @@ function detectDevice() {
     return { device, os, browser, isMobile };
 }
 
-// 🔴 PRIMEIRO: Declarar deviceInfo
 const deviceInfo = detectDevice();
 console.log(`Dispositivo detectado: ${deviceInfo.device}, OS: ${deviceInfo.os}, Browser: ${deviceInfo.browser}`);
 
-// Adicionar classe ao body
 document.body.classList.add(`device-${deviceInfo.device}`);
 if (deviceInfo.isMobile) {
     document.body.classList.add('is-mobile');
 }
 
-// Array elementos (MANTÉM SEU ARRAY COMPLETO AQUI - só copiei os primeiros como exemplo)
+// Array elementos com configurações eletrônicas COMPLETAS (expandidas)
 const elementos = [
     // Período 1
     {
@@ -75,8 +70,6 @@ const elementos = [
         historia: "Descoberto em 1868 por Pierre Janssen. Segundo elemento mais abundante no universo.",
         reacoes: "Gás nobre, completamente inerte em condições normais."
     },
-
-    // Período 2
     {
         numero: 3,
         simbolo: "Li",
@@ -87,7 +80,7 @@ const elementos = [
         protons: 3,
         neutrons: 4,
         eletrons: 3,
-        config: "[He] 2s¹",
+        config: "1s² 2s¹",
         categoria: "metal-alcalino",
         historia: "Descoberto em 1817 por Johan Arfwedson. Usado em baterias recarregáveis.",
         reacoes: "Reage violentamente com água, produzindo hidrogênio e hidróxido de lítio."
@@ -102,7 +95,7 @@ const elementos = [
         protons: 4,
         neutrons: 5,
         eletrons: 4,
-        config: "[He] 2s²",
+        config: "1s² 2s²",
         categoria: "metal-alcalino-terroso",
         historia: "Descoberto em 1798 por Louis-Nicolas Vauquelin. Usado em ligas metálicas.",
         reacoes: "Reage com ácidos, formando sais de berílio."
@@ -117,7 +110,7 @@ const elementos = [
         protons: 5,
         neutrons: 6,
         eletrons: 5,
-        config: "[He] 2s² 2p¹",
+        config: "1s² 2s² 2p¹",
         categoria: "semimetal",
         historia: "Descoberto em 1808 por Gay-Lussac e Thénard. Usado em vidros resistentes.",
         reacoes: "Forma compostos com oxigênio em altas temperaturas."
@@ -132,7 +125,7 @@ const elementos = [
         protons: 6,
         neutrons: 6,
         eletrons: 6,
-        config: "[He] 2s² 2p²",
+        config: "1s² 2s² 2p²",
         categoria: "não-metal",
         historia: "Conhecido desde a antiguidade. Base da vida na Terra.",
         reacoes: "Forma dióxido de carbono na combustão. Base da química orgânica."
@@ -147,7 +140,7 @@ const elementos = [
         protons: 7,
         neutrons: 7,
         eletrons: 7,
-        config: "[He] 2s² 2p³",
+        config: "1s² 2s² 2p³",
         categoria: "não-metal",
         historia: "Descoberto por Daniel Rutherford em 1772. Principal componente do ar.",
         reacoes: "Relativamente inerte, mas forma amônia com hidrogênio (processo Haber)."
@@ -162,7 +155,7 @@ const elementos = [
         protons: 8,
         neutrons: 8,
         eletrons: 8,
-        config: "[He] 2s² 2p⁴",
+        config: "1s² 2s² 2p⁴",
         categoria: "não-metal",
         historia: "Descoberto por Joseph Priestley em 1774. Essencial para a respiração.",
         reacoes: "Suporta combustão. Forma óxidos com praticamente todos os elementos."
@@ -177,7 +170,7 @@ const elementos = [
         protons: 9,
         neutrons: 10,
         eletrons: 9,
-        config: "[He] 2s² 2p⁵",
+        config: "1s² 2s² 2p⁵",
         categoria: "halogênio",
         historia: "Isolado por Henri Moissan em 1886. Elemento mais eletronegativo.",
         reacoes: "Extremamente reativo. Reage com praticamente todos os elementos."
@@ -192,13 +185,11 @@ const elementos = [
         protons: 10,
         neutrons: 10,
         eletrons: 10,
-        config: "[He] 2s² 2p⁶",
+        config: "1s² 2s² 2p⁶",
         categoria: "gás-nobre",
         historia: "Descoberto por William Ramsay em 1898. Usado em lâmpadas neon.",
         reacoes: "Completamente inerte. Não forma compostos químicos."
     },
-
-    // Período 3
     {
         numero: 11,
         simbolo: "Na",
@@ -209,7 +200,7 @@ const elementos = [
         protons: 11,
         neutrons: 12,
         eletrons: 11,
-        config: "[Ne] 3s¹",
+        config: "1s² 2s² 2p⁶ 3s¹",
         categoria: "metal-alcalino",
         historia: "Isolado por Humphry Davy em 1807. Essencial para a vida.",
         reacoes: "Reage violentamente com água, produzindo hidrogênio e hidróxido de sódio."
@@ -224,7 +215,7 @@ const elementos = [
         protons: 12,
         neutrons: 12,
         eletrons: 12,
-        config: "[Ne] 3s²",
+        config: "1s² 2s² 2p⁶ 3s²",
         categoria: "metal-alcalino-terroso",
         historia: "Reconhecido como elemento por Joseph Black em 1755. Essencial para plantas.",
         reacoes: "Reage com água quente e ácidos, liberando hidrogênio."
@@ -239,7 +230,7 @@ const elementos = [
         protons: 13,
         neutrons: 14,
         eletrons: 13,
-        config: "[Ne] 3s² 3p¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p¹",
         categoria: "metal",
         historia: "Isolado por Hans Christian Ørsted em 1825. Metal mais abundante na crosta.",
         reacoes: "Forma uma camada protetora de óxido. Reage com ácidos e bases."
@@ -254,7 +245,7 @@ const elementos = [
         protons: 14,
         neutrons: 14,
         eletrons: 14,
-        config: "[Ne] 3s² 3p²",
+        config: "1s² 2s² 2p⁶ 3s² 3p²",
         categoria: "semimetal",
         historia: "Identificado por Jöns Jacob Berzelius em 1824. Base da indústria eletrônica.",
         reacoes: "Reage com oxigênio em altas temperaturas formando dióxido de silício."
@@ -269,7 +260,7 @@ const elementos = [
         protons: 15,
         neutrons: 16,
         eletrons: 15,
-        config: "[Ne] 3s² 3p³",
+        config: "1s² 2s² 2p⁶ 3s² 3p³",
         categoria: "não-metal",
         historia: "Descoberto por Hennig Brand em 1669. Essencial para o DNA e ATP.",
         reacoes: "Branco é pirofórico (inflama no ar). Forma óxidos com oxigênio."
@@ -284,7 +275,7 @@ const elementos = [
         protons: 16,
         neutrons: 16,
         eletrons: 16,
-        config: "[Ne] 3s² 3p⁴",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁴",
         categoria: "não-metal",
         historia: "Conhecido desde a antiguidade. Mencionado na Bíblia como 'enxofre'.",
         reacoes: "Queima com chama azul formando dióxido de enxofre."
@@ -299,7 +290,7 @@ const elementos = [
         protons: 17,
         neutrons: 18,
         eletrons: 17,
-        config: "[Ne] 3s² 3p⁵",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁵",
         categoria: "halogênio",
         historia: "Descoberto por Carl Wilhelm Scheele em 1774. Usado em desinfetantes.",
         reacoes: "Gás verde-amarelado tóxico. Reage com metais formando cloretos."
@@ -314,13 +305,11 @@ const elementos = [
         protons: 18,
         neutrons: 22,
         eletrons: 18,
-        config: "[Ne] 3s² 3p⁶",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶",
         categoria: "gás-nobre",
         historia: "Descoberto por Lord Rayleigh e William Ramsay em 1894.",
         reacoes: "Completamente inerte. Usado em lâmpadas incandescentes."
     },
-
-    // Período 4
     {
         numero: 19,
         simbolo: "K",
@@ -331,7 +320,7 @@ const elementos = [
         protons: 19,
         neutrons: 20,
         eletrons: 19,
-        config: "[Ar] 4s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹",
         categoria: "metal-alcalino",
         historia: "Isolado por Humphry Davy em 1807. Essencial para impulsos nervosos.",
         reacoes: "Reage violentamente com água, podendo inflamar o hidrogênio produzido."
@@ -346,7 +335,7 @@ const elementos = [
         protons: 20,
         neutrons: 20,
         eletrons: 20,
-        config: "[Ar] 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s²",
         categoria: "metal-alcalino-terroso",
         historia: "Isolado por Humphry Davy em 1808. Essencial para ossos e dentes.",
         reacoes: "Reage com água formando hidróxido de cálcio e hidrogênio."
@@ -361,7 +350,7 @@ const elementos = [
         protons: 21,
         neutrons: 24,
         eletrons: 21,
-        config: "[Ar] 3d¹ 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹",
         categoria: "metal-transição",
         historia: "Descoberto por Lars Fredrik Nilson em 1879. Usado em ligas de alumínio.",
         reacoes: "Forma compostos com halogênios. Relativamente estável no ar."
@@ -376,7 +365,7 @@ const elementos = [
         protons: 22,
         neutrons: 26,
         eletrons: 22,
-        config: "[Ar] 3d² 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d²",
         categoria: "metal-transição",
         historia: "Descoberto por William Gregor em 1791. Metal forte e leve.",
         reacoes: "Resistente à corrosão devido à camada de óxido. Reage com ácidos."
@@ -391,7 +380,7 @@ const elementos = [
         protons: 23,
         neutrons: 28,
         eletrons: 23,
-        config: "[Ar] 3d³ 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d³",
         categoria: "metal-transição",
         historia: "Descoberto por Andrés Manuel del Río em 1801. Usado em aços especiais.",
         reacoes: "Resistente à corrosão. Forma compostos coloridos."
@@ -406,7 +395,7 @@ const elementos = [
         protons: 24,
         neutrons: 28,
         eletrons: 24,
-        config: "[Ar] 3d⁵ 4s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d⁵",
         categoria: "metal-transição",
         historia: "Descoberto por Louis-Nicolas Vauquelin em 1797. Usado em cromagem.",
         reacoes: "Forma uma camada protetora de óxido. Resistente à corrosão."
@@ -421,7 +410,7 @@ const elementos = [
         protons: 25,
         neutrons: 30,
         eletrons: 25,
-        config: "[Ar] 3d⁵ 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁵",
         categoria: "metal-transição",
         historia: "Isolado por Johann Gottlieb Gahn em 1774. Essencial para plantas.",
         reacoes: "Reage com ácidos. Forma compostos com vários estados de oxidação."
@@ -436,7 +425,7 @@ const elementos = [
         protons: 26,
         neutrons: 30,
         eletrons: 26,
-        config: "[Ar] 3d⁶ 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶",
         categoria: "metal-transição",
         historia: "Conhecido desde a pré-história. Essencial para a hemoglobina.",
         reacoes: "Enferruja na presença de oxigênio e água. Reage com ácidos."
@@ -451,7 +440,7 @@ const elementos = [
         protons: 27,
         neutrons: 32,
         eletrons: 27,
-        config: "[Ar] 3d⁷ 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷",
         categoria: "metal-transição",
         historia: "Descoberto por Georg Brandt em 1735. Usado em ligas magnéticas.",
         reacoes: "Resistente à oxidação. Forma compostos azuis característicos."
@@ -466,7 +455,7 @@ const elementos = [
         protons: 28,
         neutrons: 31,
         eletrons: 28,
-        config: "[Ar] 3d⁸ 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁸",
         categoria: "metal-transição",
         historia: "Isolado por Axel Fredrik Cronstedt em 1751. Usado em aço inoxidável.",
         reacoes: "Resistente à corrosão. Forma compostos verdes."
@@ -481,7 +470,7 @@ const elementos = [
         protons: 29,
         neutrons: 35,
         eletrons: 29,
-        config: "[Ar] 3d¹⁰ 4s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d¹⁰",
         categoria: "metal-transição",
         historia: "Conhecido desde 9000 a.C. Primeiro metal usado por humanos.",
         reacoes: "Oxida formando uma pátina verde. Excelente condutor elétrico."
@@ -496,7 +485,7 @@ const elementos = [
         protons: 30,
         neutrons: 35,
         eletrons: 30,
-        config: "[Ar] 3d¹⁰ 4s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰",
         categoria: "metal-transição",
         historia: "Usado desde a antiguidade na produção de latão. Essencial para enzimas.",
         reacoes: "Reage com ácidos liberando hidrogênio. Usado em galvanização."
@@ -511,7 +500,7 @@ const elementos = [
         protons: 31,
         neutrons: 39,
         eletrons: 31,
-        config: "[Ar] 3d¹⁰ 4s² 4p¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p¹",
         categoria: "metal",
         historia: "Descoberto por Paul-Émile Lecoq de Boisbaudran em 1875. Derrete na mão.",
         reacoes: "Forma compostos com arsênio (arsenieto de gálio) usados em semicondutores."
@@ -526,7 +515,7 @@ const elementos = [
         protons: 32,
         neutrons: 41,
         eletrons: 32,
-        config: "[Ar] 3d¹⁰ 4s² 4p²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p²",
         categoria: "semimetal",
         historia: "Descoberto por Clemens Winkler em 1886. Usado nos primeiros transistores.",
         reacoes: "Forma dióxido de germânio. Semicondutor importante."
@@ -541,7 +530,7 @@ const elementos = [
         protons: 33,
         neutrons: 42,
         eletrons: 33,
-        config: "[Ar] 3d¹⁰ 4s² 4p³",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p³",
         categoria: "semimetal",
         historia: "Conhecido desde a antiguidade. Usado como veneno e em semicondutores.",
         reacoes: "Forma óxido de arsênio (trióxido de arsênio) quando queimado."
@@ -556,7 +545,7 @@ const elementos = [
         protons: 34,
         neutrons: 45,
         eletrons: 34,
-        config: "[Ar] 3d¹⁰ 4s² 4p⁴",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁴",
         categoria: "não-metal",
         historia: "Descoberto por Jöns Jacob Berzelius em 1817. Essencial em traços para a saúde.",
         reacoes: "Queima com chama azul formando dióxido de selênio."
@@ -571,7 +560,7 @@ const elementos = [
         protons: 35,
         neutrons: 45,
         eletrons: 35,
-        config: "[Ar] 3d¹⁰ 4s² 4p⁵",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁵",
         categoria: "halogênio",
         historia: "Descoberto por Antoine Balard em 1826. Único halogênio líquido à temperatura ambiente.",
         reacoes: "Líquido vermelho volátil. Reage com metais formando brometos."
@@ -586,13 +575,11 @@ const elementos = [
         protons: 36,
         neutrons: 48,
         eletrons: 36,
-        config: "[Ar] 3d¹⁰ 4s² 4p⁶",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶",
         categoria: "gás-nobre",
         historia: "Descoberto por William Ramsay e Morris Travers em 1898. Usado em lasers.",
         reacoes: "Quase inerte, mas forma alguns compostos com flúor."
     },
-
-    // Período 5
     {
         numero: 37,
         simbolo: "Rb",
@@ -603,7 +590,7 @@ const elementos = [
         protons: 37,
         neutrons: 48,
         eletrons: 37,
-        config: "[Kr] 5s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹",
         categoria: "metal-alcalino",
         historia: "Descoberto por Robert Bunsen e Gustav Kirchhoff em 1861.",
         reacoes: "Reage violentamente com água, mais reativo que potássio."
@@ -618,7 +605,7 @@ const elementos = [
         protons: 38,
         neutrons: 50,
         eletrons: 38,
-        config: "[Kr] 5s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s²",
         categoria: "metal-alcalino-terroso",
         historia: "Descoberto por Adair Crawford em 1790. Usado em fogos de artifício vermelhos.",
         reacoes: "Reage com água formando hidróxido de estrôncio e hidrogênio."
@@ -633,7 +620,7 @@ const elementos = [
         protons: 39,
         neutrons: 50,
         eletrons: 39,
-        config: "[Kr] 4d¹ 5s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹",
         categoria: "metal-transição",
         historia: "Descoberto por Johan Gadolin em 1794. Usado em lasers e supercondutores.",
         reacoes: "Forma óxido de ítrio. Relativamente estável no ar."
@@ -648,7 +635,7 @@ const elementos = [
         protons: 40,
         neutrons: 51,
         eletrons: 40,
-        config: "[Kr] 4d² 5s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d²",
         categoria: "metal-transição",
         historia: "Descoberto por Martin Heinrich Klaproth em 1789. Usado em reatores nucleares.",
         reacoes: "Resistente à corrosão. Forma compostos com oxigênio."
@@ -663,7 +650,7 @@ const elementos = [
         protons: 41,
         neutrons: 52,
         eletrons: 41,
-        config: "[Kr] 4d⁴ 5s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁴",
         categoria: "metal-transição",
         historia: "Descoberto por Charles Hatchett em 1801. Brasil é o maior produtor mundial.",
         reacoes: "Resistente à corrosão. Usado em ligas especiais."
@@ -678,7 +665,7 @@ const elementos = [
         protons: 42,
         neutrons: 54,
         eletrons: 42,
-        config: "[Kr] 4d⁵ 5s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁵",
         categoria: "metal-transição",
         historia: "Isolado por Peter Jacob Hjelm em 1781. Essencial para enzimas.",
         reacoes: "Resistente a altas temperaturas. Forma compostos com enxofre."
@@ -693,7 +680,7 @@ const elementos = [
         protons: 43,
         neutrons: 55,
         eletrons: 43,
-        config: "[Kr] 4d⁵ 5s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁵",
         categoria: "metal-transição",
         historia: "Descoberto por Carlo Perrier e Emilio Segrè em 1937. Primeiro elemento artificial.",
         reacoes: "Radioativo. Usado em medicina nuclear para diagnósticos."
@@ -708,7 +695,7 @@ const elementos = [
         protons: 44,
         neutrons: 57,
         eletrons: 44,
-        config: "[Kr] 4d⁷ 5s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁷",
         categoria: "metal-transição",
         historia: "Descoberto por Karl Ernst Claus em 1844. Metal do grupo da platina.",
         reacoes: "Resistente à corrosão. Usado como catalisador."
@@ -723,7 +710,7 @@ const elementos = [
         protons: 45,
         neutrons: 58,
         eletrons: 45,
-        config: "[Kr] 4d⁸ 5s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁸",
         categoria: "metal-transição",
         historia: "Descoberto por William Hyde Wollaston em 1803. Metal mais caro do mundo.",
         reacoes: "Extremamente resistente à corrosão. Usado em conversores catalíticos."
@@ -738,7 +725,7 @@ const elementos = [
         protons: 46,
         neutrons: 60,
         eletrons: 46,
-        config: "[Kr] 4d¹⁰",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 4d¹⁰",
         categoria: "metal-transição",
         historia: "Descoberto por William Hyde Wollaston em 1803. Absorve hidrogênio.",
         reacoes: "Resistente à corrosão. Usado em catálise e joalheria."
@@ -753,7 +740,7 @@ const elementos = [
         protons: 47,
         neutrons: 61,
         eletrons: 47,
-        config: "[Kr] 4d¹⁰ 5s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d¹⁰",
         categoria: "metal-transição",
         historia: "Conhecida desde 4000 a.C. Melhor condutora elétrica e térmica.",
         reacoes: "Escurece na presença de compostos de enxofre. Resistente à oxidação."
@@ -768,7 +755,7 @@ const elementos = [
         protons: 48,
         neutrons: 64,
         eletrons: 48,
-        config: "[Kr] 4d¹⁰ 5s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰",
         categoria: "metal-transição",
         historia: "Descoberto por Friedrich Strohmeyer em 1817. Usado em baterias.",
         reacoes: "Tóxico. Forma compostos com oxigênio e enxofre."
@@ -783,7 +770,7 @@ const elementos = [
         protons: 49,
         neutrons: 66,
         eletrons: 49,
-        config: "[Kr] 4d¹⁰ 5s² 5p¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p¹",
         categoria: "metal",
         historia: "Descoberto por Ferdinand Reich e Hieronymous Richter em 1863.",
         reacoes: "Usado em telas de toque e soldas especiais. Maleável."
@@ -798,7 +785,7 @@ const elementos = [
         protons: 50,
         neutrons: 69,
         eletrons: 50,
-        config: "[Kr] 4d¹⁰ 5s² 5p²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p²",
         categoria: "metal",
         historia: "Conhecido desde 3500 a.C. Usado em ligas de bronze.",
         reacoes: "Resistente à corrosão. Forma dióxido de estanho."
@@ -813,7 +800,7 @@ const elementos = [
         protons: 51,
         neutrons: 71,
         eletrons: 51,
-        config: "[Kr] 4d¹⁰ 5s² 5p³",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p³",
         categoria: "semimetal",
         historia: "Conhecido desde a antiguidade. Usado em retardantes de chamas.",
         reacoes: "Forma trióxido de antimônio quando queimado."
@@ -828,7 +815,7 @@ const elementos = [
         protons: 52,
         neutrons: 76,
         eletrons: 52,
-        config: "[Kr] 4d¹⁰ 5s² 5p⁴",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁴",
         categoria: "semimetal",
         historia: "Descoberto por Franz-Joseph Müller von Reichenstein em 1782.",
         reacoes: "Forma compostos com oxigênio e hidrogênio."
@@ -843,7 +830,7 @@ const elementos = [
         protons: 53,
         neutrons: 74,
         eletrons: 53,
-        config: "[Kr] 4d¹⁰ 5s² 5p⁵",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁵",
         categoria: "halogênio",
         historia: "Descoberto por Bernard Courtois em 1811. Essencial para a tireoide.",
         reacoes: "Sublima à temperatura ambiente. Reage com amido formando cor azul."
@@ -858,13 +845,11 @@ const elementos = [
         protons: 54,
         neutrons: 77,
         eletrons: 54,
-        config: "[Kr] 4d¹⁰ 5s² 5p⁶",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶",
         categoria: "gás-nobre",
         historia: "Descoberto por William Ramsay e Morris Travers em 1898.",
         reacoes: "Forma alguns compostos com flúor e oxigênio, diferente de outros gases nobres."
     },
-
-    // Período 6 (incluindo Lantanídeos)
     {
         numero: 55,
         simbolo: "Cs",
@@ -875,7 +860,7 @@ const elementos = [
         protons: 55,
         neutrons: 78,
         eletrons: 55,
-        config: "[Xe] 6s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹",
         categoria: "metal-alcalino",
         historia: "Descoberto por Robert Bunsen e Gustav Kirchhoff em 1860. Mais reativo dos metais.",
         reacoes: "Reage explosivamente com água. Usado em relógios atômicos."
@@ -890,7 +875,7 @@ const elementos = [
         protons: 56,
         neutrons: 81,
         eletrons: 56,
-        config: "[Xe] 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s²",
         categoria: "metal-alcalino-terroso",
         historia: "Identificado por Humphry Davy em 1808. Usado em exames de raio-X.",
         reacoes: "Reage com água formando hidróxido de bário. Compostos são tóxicos."
@@ -905,13 +890,11 @@ const elementos = [
         protons: 57,
         neutrons: 82,
         eletrons: 57,
-        config: "[Xe] 5d¹ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 5d¹",
         categoria: "lantanídeo",
         historia: "Descoberto por Carl Gustaf Mosander em 1839. Primeiro dos lantanídeos.",
         reacoes: "Forma compostos com oxigênio e halogênios. Usado em ligas."
     },
-
-    // Lantanídeos (58-71)
     {
         numero: 58,
         simbolo: "Ce",
@@ -922,7 +905,7 @@ const elementos = [
         protons: 58,
         neutrons: 82,
         eletrons: 58,
-        config: "[Xe] 4f¹ 5d¹ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹ 5d¹",
         categoria: "lantanídeo",
         historia: "Descoberto por Jöns Jacob Berzelius e Wilhelm Hisinger em 1803.",
         reacoes: "Oxida facilmente no ar. Usado em pedras de isqueiro."
@@ -937,7 +920,7 @@ const elementos = [
         protons: 59,
         neutrons: 82,
         eletrons: 59,
-        config: "[Xe] 4f³ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f³",
         categoria: "lantanídeo",
         historia: "Descoberto por Carl Auer von Welsbach em 1885.",
         reacoes: "Forma compostos verdes. Usado em ligas para ímãs."
@@ -952,7 +935,7 @@ const elementos = [
         protons: 60,
         neutrons: 84,
         eletrons: 60,
-        config: "[Xe] 4f⁴ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁴",
         categoria: "lantanídeo",
         historia: "Descoberto por Carl Auer von Welsbach em 1885.",
         reacoes: "Usado nos ímãs mais fortes conhecidos (ímãs de neodímio)."
@@ -967,7 +950,7 @@ const elementos = [
         protons: 61,
         neutrons: 84,
         eletrons: 61,
-        config: "[Xe] 4f⁵ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁵",
         categoria: "lantanídeo",
         historia: "Descoberto por Jacob Marinsky, Lawrence Glendenin e Charles Coryell em 1945.",
         reacoes: "Radioativo. Usado em baterias nucleares."
@@ -982,7 +965,7 @@ const elementos = [
         protons: 62,
         neutrons: 88,
         eletrons: 62,
-        config: "[Xe] 4f⁶ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁶",
         categoria: "lantanídeo",
         historia: "Descoberto por Paul-Émile Lecoq de Boisbaudran em 1879.",
         reacoes: "Usado em ímãs resistentes a altas temperaturas."
@@ -997,7 +980,7 @@ const elementos = [
         protons: 63,
         neutrons: 89,
         eletrons: 63,
-        config: "[Xe] 4f⁷ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁷",
         categoria: "lantanídeo",
         historia: "Descoberto por Eugène-Anatole Demarçay em 1901.",
         reacoes: "Usado em fósforos vermelhos para TVs e telas."
@@ -1012,7 +995,7 @@ const elementos = [
         protons: 64,
         neutrons: 93,
         eletrons: 64,
-        config: "[Xe] 4f⁷ 5d¹ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁷ 5d¹",
         categoria: "lantanídeo",
         historia: "Descoberto por Jean Charles Galissard de Marignac em 1880.",
         reacoes: "Usado em ressonância magnética como contraste."
@@ -1027,7 +1010,7 @@ const elementos = [
         protons: 65,
         neutrons: 94,
         eletrons: 65,
-        config: "[Xe] 4f⁹ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁹",
         categoria: "lantanídeo",
         historia: "Descoberto por Carl Gustaf Mosander em 1843.",
         reacoes: "Usado em ligas para dispositivos magnetostritivos."
@@ -1042,7 +1025,7 @@ const elementos = [
         protons: 66,
         neutrons: 96,
         eletrons: 66,
-        config: "[Xe] 4f¹⁰ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁰",
         categoria: "lantanídeo",
         historia: "Descoberto por Paul-Émile Lecoq de Boisbaudran em 1886.",
         reacoes: "Usado em ímãs de neodímio para melhorar resistência térmica."
@@ -1057,7 +1040,7 @@ const elementos = [
         protons: 67,
         neutrons: 98,
         eletrons: 67,
-        config: "[Xe] 4f¹¹ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹¹",
         categoria: "lantanídeo",
         historia: "Descoberto por Per Teodor Cleve em 1879.",
         reacoes: "Tem o maior momento magnético de qualquer elemento."
@@ -1072,7 +1055,7 @@ const elementos = [
         protons: 68,
         neutrons: 99,
         eletrons: 68,
-        config: "[Xe] 4f¹² 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹²",
         categoria: "lantanídeo",
         historia: "Descoberto por Carl Gustaf Mosander em 1843.",
         reacoes: "Usado em amplificadores de fibra óptica."
@@ -1087,7 +1070,7 @@ const elementos = [
         protons: 69,
         neutrons: 100,
         eletrons: 69,
-        config: "[Xe] 4f¹³ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹³",
         categoria: "lantanídeo",
         historia: "Descoberto por Per Teodor Cleve em 1879.",
         reacoes: "Metal caro e raro. Usado em lasers portáteis."
@@ -1102,28 +1085,26 @@ const elementos = [
         protons: 70,
         neutrons: 103,
         eletrons: 70,
-        config: "[Xe] 4f¹⁴ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴",
         categoria: "lantanídeo",
         historia: "Descoberto por Jean Charles Galissard de Marignac em 1878.",
         reacoes: "Usado em ligas de aço inoxidável e lasers."
     },
-    {
-        numero: 71,
-        simbolo: "Lu",
-        nome: "Lutécio",
-        massa: "174.97",
-        grupo: 3,
-        periodo: 6,
-        protons: 71,
-        neutrons: 104,
-        eletrons: 71,
-        config: "[Xe] 4f¹⁴ 5d¹ 6s²",
-        categoria: "lantanídeo",
-        historia: "Descoberto por Georges Urbain e Carl Auer von Welsbach em 1907.",
-        reacoes: "Último dos lantanídeos. Usado em tomografia por emissão de pósitrons."
-    },
-
-    // Continuação Período 6 (72-86)
+{
+    numero: 71,
+    simbolo: "Lu",
+    nome: "Lutécio",
+    massa: "174.97",
+    grupo: 3,
+    periodo: 6,
+    protons: 71,
+    neutrons: 104,
+    eletrons: 71,
+    config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹",
+    categoria: "lantanídeo",
+    historia: "Descoberto por Georges Urbain e Carl Auer von Welsbach em 1907.",
+    reacoes: "Último dos lantanídeos. Usado em tomografia por emissão de pósitrons."
+},
     {
         numero: 72,
         simbolo: "Hf",
@@ -1134,7 +1115,7 @@ const elementos = [
         protons: 72,
         neutrons: 106,
         eletrons: 72,
-        config: "[Xe] 4f¹⁴ 5d² 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d²",
         categoria: "metal-transição",
         historia: "Descoberto por Dirk Coster e George de Hevesy em 1923.",
         reacoes: "Usado em barras de controle de reatores nucleares."
@@ -1149,7 +1130,7 @@ const elementos = [
         protons: 73,
         neutrons: 108,
         eletrons: 73,
-        config: "[Xe] 4f¹⁴ 5d³ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d³",
         categoria: "metal-transição",
         historia: "Descoberto por Anders Gustaf Ekeberg em 1802.",
         reacoes: "Extremamente resistente à corrosão. Usado em capacitores."
@@ -1164,7 +1145,7 @@ const elementos = [
         protons: 74,
         neutrons: 110,
         eletrons: 74,
-        config: "[Xe] 4f¹⁴ 5d⁴ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁴",
         categoria: "metal-transição",
         historia: "Identificado por Carl Wilhelm Scheele em 1781. Maior ponto de fusão.",
         reacoes: "Resistente à oxidação. Usado em filamentos de lâmpadas."
@@ -1179,7 +1160,7 @@ const elementos = [
         protons: 75,
         neutrons: 111,
         eletrons: 75,
-        config: "[Xe] 4f¹⁴ 5d⁵ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁵",
         categoria: "metal-transição",
         historia: "Descoberto por Walter Noddack, Ida Tacke e Otto Berg em 1925.",
         reacoes: "Alto ponto de fusão. Usado em ligas de alta temperatura."
@@ -1194,7 +1175,7 @@ const elementos = [
         protons: 76,
         neutrons: 114,
         eletrons: 76,
-        config: "[Xe] 4f¹⁴ 5d⁶ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁶",
         categoria: "metal-transição",
         historia: "Descoberto por Smithson Tennant em 1803. Elemento mais denso.",
         reacoes: "Forma tetróxido de ósmio tóxico. Resistente à corrosão."
@@ -1209,7 +1190,7 @@ const elementos = [
         protons: 77,
         neutrons: 115,
         eletrons: 77,
-        config: "[Xe] 4f¹⁴ 5d⁷ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁷",
         categoria: "metal-transição",
         historia: "Descoberto por Smithson Tennant em 1803. Metal mais resistente à corrosão.",
         reacoes: "Usado em velas de ignição e crucífos de laboratório."
@@ -1224,7 +1205,7 @@ const elementos = [
         protons: 78,
         neutrons: 117,
         eletrons: 78,
-        config: "[Xe] 4f¹⁴ 5d⁹ 6s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹ 4f¹⁴ 5d⁹",
         categoria: "metal-transição",
         historia: "Usada por civilizações pré-colombianas. Descoberta por europeus em 1735.",
         reacoes: "Excelente catalisador. Resistente à oxidação."
@@ -1239,7 +1220,7 @@ const elementos = [
         protons: 79,
         neutrons: 118,
         eletrons: 79,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹ 4f¹⁴ 5d¹⁰",
         categoria: "metal-transição",
         historia: "Conhecido desde 4000 a.C. Metal mais maleável e dúctil.",
         reacoes: "Não oxida. Dissolve-se em água régia (HCl + HNO₃)."
@@ -1254,7 +1235,7 @@ const elementos = [
         protons: 80,
         neutrons: 121,
         eletrons: 80,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰",
         categoria: "metal-transição",
         historia: "Conhecido desde a antiguidade. Único metal líquido à temperatura ambiente.",
         reacoes: "Forma amálgamas com outros metais. Tóxico."
@@ -1269,7 +1250,7 @@ const elementos = [
         protons: 81,
         neutrons: 123,
         eletrons: 81,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p¹",
         categoria: "metal",
         historia: "Descoberto por William Crookes em 1861. Extremamente tóxico.",
         reacoes: "Oxida facilmente no ar. Compostos são venenosos."
@@ -1284,7 +1265,7 @@ const elementos = [
         protons: 82,
         neutrons: 125,
         eletrons: 82,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p²",
         categoria: "metal",
         historia: "Conhecido desde 7000 a.C. Usado em tubulações na Roma antiga.",
         reacoes: "Resistente à corrosão. Forma uma camada protetora de óxido."
@@ -1299,7 +1280,7 @@ const elementos = [
         protons: 83,
         neutrons: 126,
         eletrons: 83,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p³",
         categoria: "metal",
         historia: "Conhecido desde a Idade Média. Usado em medicamentos.",
         reacoes: "Forma cristais iridescentes. Baixa toxicidade."
@@ -1314,7 +1295,7 @@ const elementos = [
         protons: 84,
         neutrons: 125,
         eletrons: 84,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁴",
         categoria: "semimetal",
         historia: "Descoberto por Marie e Pierre Curie em 1898. Altamente radioativo.",
         reacoes: "Usado em fontes de nêutrons. Muito perigoso."
@@ -1329,7 +1310,7 @@ const elementos = [
         protons: 85,
         neutrons: 125,
         eletrons: 85,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁵",
         categoria: "halogênio",
         historia: "Descoberto por Dale Corson, Kenneth MacKenzie e Emilio Segrè em 1940.",
         reacoes: "Elemento mais raro na crosta terrestre. Radioativo."
@@ -1344,13 +1325,11 @@ const elementos = [
         protons: 86,
         neutrons: 136,
         eletrons: 86,
-        config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶",
         categoria: "gás-nobre",
         historia: "Descoberto por Friedrich Ernst Dorn em 1900. Gás radioativo.",
         reacoes: "Decai em partículas alfa. Segunda maior causa de câncer de pulmão."
     },
-
-    // Período 7 (incluindo Actinídeos)
     {
         numero: 87,
         simbolo: "Fr",
@@ -1361,7 +1340,7 @@ const elementos = [
         protons: 87,
         neutrons: 136,
         eletrons: 87,
-        config: "[Rn] 7s¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s¹",
         categoria: "metal-alcalino",
         historia: "Descoberto por Marguerite Perey em 1939. Elemento mais instável.",
         reacoes: "Altamente radioativo. Menos de 30g na crosta terrestre."
@@ -1376,7 +1355,7 @@ const elementos = [
         protons: 88,
         neutrons: 138,
         eletrons: 88,
-        config: "[Rn] 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s²",
         categoria: "metal-alcalino-terroso",
         historia: "Descoberto por Marie e Pierre Curie em 1898. Usado em tratamentos de câncer.",
         reacoes: "Radioativo. Brilha no escuro devido à radiação."
@@ -1391,13 +1370,11 @@ const elementos = [
         protons: 89,
         neutrons: 138,
         eletrons: 89,
-        config: "[Rn] 6d¹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 6d¹",
         categoria: "actinídeo",
         historia: "Descoberto por André-Louis Debierne em 1899. Dá nome à série dos actinídeos.",
         reacoes: "Altamente radioativo. Brilha azul no escuro."
     },
-
-    // Actinídeos (90-103)
     {
         numero: 90,
         simbolo: "Th",
@@ -1408,7 +1385,7 @@ const elementos = [
         protons: 90,
         neutrons: 142,
         eletrons: 90,
-        config: "[Rn] 6d² 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 6d²",
         categoria: "actinídeo",
         historia: "Descoberto por Jöns Jacob Berzelius em 1829. Alternativa para energia nuclear.",
         reacoes: "Radioativo. Usado em mantas de lampiões a gás."
@@ -1423,7 +1400,7 @@ const elementos = [
         protons: 91,
         neutrons: 140,
         eletrons: 91,
-        config: "[Rn] 5f² 6d¹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f² 6d¹",
         categoria: "actinídeo",
         historia: "Descoberto por Otto Hahn e Lise Meitner em 1917.",
         reacoes: "Radioativo. Raro e caro."
@@ -1438,7 +1415,7 @@ const elementos = [
         protons: 92,
         neutrons: 146,
         eletrons: 92,
-        config: "[Rn] 5f³ 6d¹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f³ 6d¹",
         categoria: "actinídeo",
         historia: "Descoberto por Martin Heinrich Klaproth em 1789. Usado em bombas atômicas.",
         reacoes: "Radioativo. Usado como combustível nuclear."
@@ -1453,7 +1430,7 @@ const elementos = [
         protons: 93,
         neutrons: 144,
         eletrons: 93,
-        config: "[Rn] 5f⁴ 6d¹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁴ 6d¹",
         categoria: "actinídeo",
         historia: "Descoberto por Edwin McMillan e Philip Abelson em 1940.",
         reacoes: "Primeiro elemento transurânico sintético."
@@ -1468,7 +1445,7 @@ const elementos = [
         protons: 94,
         neutrons: 150,
         eletrons: 94,
-        config: "[Rn] 5f⁶ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁶",
         categoria: "actinídeo",
         historia: "Descoberto por Glenn Seaborg e equipe em 1940. Usado em bombas nucleares.",
         reacoes: "Altamente tóxico e radioativo. Usado em geradores termoelétricos."
@@ -1483,7 +1460,7 @@ const elementos = [
         protons: 95,
         neutrons: 148,
         eletrons: 95,
-        config: "[Rn] 5f⁷ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁷",
         categoria: "actinídeo",
         historia: "Descoberto por Glenn Seaborg e equipe em 1944. Usado em detectores de fumaça.",
         reacoes: "Emite radiação alfa. Usado em medidores de espessura."
@@ -1498,7 +1475,7 @@ const elementos = [
         protons: 96,
         neutrons: 151,
         eletrons: 96,
-        config: "[Rn] 5f⁷ 6d¹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁷ 6d¹",
         categoria: "actinídeo",
         historia: "Descoberto por Glenn Seaborg e equipe em 1944. Nomeado em homenagem aos Curie.",
         reacoes: "Usado em geradores termoelétricos para sondas espaciais."
@@ -1513,7 +1490,7 @@ const elementos = [
         protons: 97,
         neutrons: 150,
         eletrons: 97,
-        config: "[Rn] 5f⁹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁹",
         categoria: "actinídeo",
         historia: "Descoberto por Glenn Seaborg e equipe em 1949 em Berkeley.",
         reacoes: "Produzido em quantidades microscópicas."
@@ -1528,7 +1505,7 @@ const elementos = [
         protons: 98,
         neutrons: 153,
         eletrons: 98,
-        config: "[Rn] 5f¹⁰ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁰",
         categoria: "actinídeo",
         historia: "Descoberto por Glenn Seaborg e equipe em 1950 na Califórnia.",
         reacoes: "Usado como fonte de nêutrons para iniciar reações nucleares."
@@ -1543,7 +1520,7 @@ const elementos = [
         protons: 99,
         neutrons: 153,
         eletrons: 99,
-        config: "[Rn] 5f¹¹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹¹",
         categoria: "actinídeo",
         historia: "Descoberto por Albert Ghiorso e equipe em 1952. Nomeado em homenagem a Einstein.",
         reacoes: "Produzido em explosões de bombas de hidrogênio."
@@ -1558,7 +1535,7 @@ const elementos = [
         protons: 100,
         neutrons: 157,
         eletrons: 100,
-        config: "[Rn] 5f¹² 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹²",
         categoria: "actinídeo",
         historia: "Descoberto por Albert Ghiorso e equipe em 1952. Nomeado em homenagem a Fermi.",
         reacoes: "Produzido em testes termonucleares."
@@ -1573,7 +1550,7 @@ const elementos = [
         protons: 101,
         neutrons: 157,
         eletrons: 101,
-        config: "[Rn] 5f¹³ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹³",
         categoria: "actinídeo",
         historia: "Descoberto por Albert Ghiorso e equipe em 1955. Nomeado em homenagem a Mendeleev.",
         reacoes: "Produzido átomo por átomo."
@@ -1588,28 +1565,26 @@ const elementos = [
         protons: 102,
         neutrons: 157,
         eletrons: 102,
-        config: "[Rn] 5f¹⁴ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴",
         categoria: "actinídeo",
         historia: "Descoberto por equipes na Suécia e Rússia nos anos 1950.",
         reacoes: "Nomeado em homenagem a Alfred Nobel."
     },
-    {
-        numero: 103,
-        simbolo: "Lr",
-        nome: "Laurêncio",
-        massa: "266",
-        grupo: 3,
-        periodo: 7,
-        protons: 103,
-        neutrons: 163,
-        eletrons: 103,
-        config: "[Rn] 5f¹⁴ 7s² 7p¹",
-        categoria: "actinídeo",
-        historia: "Descoberto por Albert Ghiorso e equipe em 1961. Nomeado em homenagem a Lawrence.",
-        reacoes: "Último dos actinídeos."
-    },
-
-    // Continuação Período 7 (104-118)
+{
+    numero: 103,
+    simbolo: "Lr",
+    nome: "Laurêncio",
+    massa: "266",
+    grupo: 3,
+    periodo: 7,
+    protons: 103,
+    neutrons: 163,
+    eletrons: 103,
+    config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 7p¹",
+    categoria: "actinídeo",
+    historia: "Descoberto por Albert Ghiorso e equipe em 1961. Nomeado em homenagem a Lawrence.",
+    reacoes: "Último dos actinídeos."
+},
     {
         numero: 104,
         simbolo: "Rf",
@@ -1620,7 +1595,7 @@ const elementos = [
         protons: 104,
         neutrons: 163,
         eletrons: 104,
-        config: "[Rn] 5f¹⁴ 6d² 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d²",
         categoria: "metal-transição",
         historia: "Descoberto por Albert Ghiorso e equipe em 1969. Nomeado em homenagem a Rutherford.",
         reacoes: "Elemento sintético radioativo."
@@ -1635,7 +1610,7 @@ const elementos = [
         protons: 105,
         neutrons: 163,
         eletrons: 105,
-        config: "[Rn] 5f¹⁴ 6d³ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d³",
         categoria: "metal-transição",
         historia: "Descoberto por Albert Ghiorso e equipe em 1970. Nomeado em homenagem a Dubna.",
         reacoes: "Sintético. Meia-vida muito curta."
@@ -1650,7 +1625,7 @@ const elementos = [
         protons: 106,
         neutrons: 163,
         eletrons: 106,
-        config: "[Rn] 5f¹⁴ 6d⁴ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁴",
         categoria: "metal-transição",
         historia: "Descoberto por Albert Ghiorso e equipe em 1974. Nomeado em homenagem a Seaborg.",
         reacoes: "Sintético. Nomeado enquanto Seaborg ainda estava vivo."
@@ -1665,7 +1640,7 @@ const elementos = [
         protons: 107,
         neutrons: 163,
         eletrons: 107,
-        config: "[Rn] 5f¹⁴ 6d⁵ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁵",
         categoria: "metal-transição",
         historia: "Descoberto por Peter Armbruster e equipe em 1981. Nomeado em homenagem a Bohr.",
         reacoes: "Sintético. Meia-vida de segundos."
@@ -1680,7 +1655,7 @@ const elementos = [
         protons: 108,
         neutrons: 161,
         eletrons: 108,
-        config: "[Rn] 5f¹⁴ 6d⁶ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁶",
         categoria: "metal-transição",
         historia: "Descoberto por Peter Armbruster e equipe em 1984. Nomeado em homenagem a Hessen.",
         reacoes: "Sintético. Nomeado pela região de Hessen na Alemanha."
@@ -1695,7 +1670,7 @@ const elementos = [
         protons: 109,
         neutrons: 169,
         eletrons: 109,
-        config: "[Rn] 5f¹⁴ 6d⁷ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁷",
         categoria: "metal-transição",
         historia: "Descoberto por Peter Armbruster e equipe em 1982. Nomeado em homenagem a Lise Meitner.",
         reacoes: "Sintético. Homenagem a uma das maiores físicas."
@@ -1710,7 +1685,7 @@ const elementos = [
         protons: 110,
         neutrons: 171,
         eletrons: 110,
-        config: "[Rn] 5f¹⁴ 6d⁸ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁸",
         categoria: "metal-transição",
         historia: "Descoberto por Sigurd Hofmann e equipe em 1994. Nomeado em homenagem a Darmstadt.",
         reacoes: "Sintético. Produzido no GSI Helmholtz."
@@ -1725,7 +1700,7 @@ const elementos = [
         protons: 111,
         neutrons: 171,
         eletrons: 111,
-        config: "[Rn] 5f¹⁴ 6d⁹ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁹",
         categoria: "metal-transição",
         historia: "Descoberto por Sigurd Hofmann e equipe em 1994. Nomeado em homenagem a Röntgen.",
         reacoes: "Sintético. Homenagem ao descobridor dos raios-X."
@@ -1740,7 +1715,7 @@ const elementos = [
         protons: 112,
         neutrons: 173,
         eletrons: 112,
-        config: "[Rn] 5f¹⁴ 6d¹⁰ 7s²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰",
         categoria: "metal-transição",
         historia: "Descoberto por Sigurd Hofmann e equipe em 1996. Nomeado em homenagem a Copérnico.",
         reacoes: "Sintético. Nomeado em 2010."
@@ -1755,7 +1730,7 @@ const elementos = [
         protons: 113,
         neutrons: 173,
         eletrons: 113,
-        config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p¹",
         categoria: "metal",
         historia: "Descoberto por equipe japonesa no RIKEN em 2004. Primeiro elemento descoberto na Ásia.",
         reacoes: "Sintético. Nomeado em homenagem ao Japão (Nihon)."
@@ -1770,7 +1745,7 @@ const elementos = [
         protons: 114,
         neutrons: 175,
         eletrons: 114,
-        config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p²",
         categoria: "metal",
         historia: "Descoberto por Yuri Oganessian e equipe em 1999. Nomeado em homenagem a Flerov.",
         reacoes: "Sintético. Homenagem ao Laboratório Flerov de Reações Nucleares."
@@ -1785,7 +1760,7 @@ const elementos = [
         protons: 115,
         neutrons: 175,
         eletrons: 115,
-        config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p³",
         categoria: "metal",
         historia: "Descoberto por Yuri Oganessian e equipe em 2003. Nomeado em homenagem a Moscou.",
         reacoes: "Sintético. Meia-vida de frações de segundo."
@@ -1800,7 +1775,7 @@ const elementos = [
         protons: 116,
         neutrons: 177,
         eletrons: 116,
-        config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁴",
         categoria: "metal",
         historia: "Descoberto por Yuri Oganessian e equipe em 2000. Nomeado em homenagem a Livermore.",
         reacoes: "Sintético. Homenagem ao Laboratório Nacional Lawrence Livermore."
@@ -1815,7 +1790,7 @@ const elementos = [
         protons: 117,
         neutrons: 177,
         eletrons: 117,
-        config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁵",
         categoria: "halogênio",
         historia: "Descoberto por Yuri Oganessian e equipe em 2010. Nomeado em homenagem ao Tennessee.",
         reacoes: "Sintético. Homenagem ao estado do Tennessee (Oak Ridge)."
@@ -1830,7 +1805,7 @@ const elementos = [
         protons: 118,
         neutrons: 176,
         eletrons: 118,
-        config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶",
+        config: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁶",
         categoria: "gás-nobre",
         historia: "Descoberto por Yuri Oganessian e equipe em 2002. Nomeado em homenagem a Yuri Oganessian.",
         reacoes: "Sintético. Único elemento nomeado em homenagem a uma pessoa viva (na época)."
@@ -1848,8 +1823,15 @@ let compactMode = false;
 // Limpar tabela
 tabela.innerHTML = "";
 
-// 🔴 CORREÇÃO: Função para criar elementos
+
+
+// Função para criar elementos da tabela
+// Função para criar elementos da tabela
 function criarElementos() {
+    // Primeiro, limpar a tabela
+    tabela.innerHTML = "";
+    
+    // Criar todos os elementos normais
     elementos.forEach(el => {
         const div = document.createElement("div");
         div.classList.add("elemento");
@@ -1859,11 +1841,29 @@ function criarElementos() {
             div.setAttribute("data-categoria", el.categoria);
         }
         
-        // Posicionamento na grade
-        div.style.gridColumn = el.grupo;
-        div.style.gridRow = el.periodo;
+        // POSICIONAMENTO CORRETO NA TABELA PERIÓDICA
+        let grupoCorrigido = el.grupo;
+        let periodoCorrigido = el.periodo;
         
-        // 🔴 CORREÇÃO: Mostrar nome e massa apenas em desktop
+        // Lantanídeos (57-71) devem ficar na LINHA 8 (abaixo da tabela principal)
+        if (el.numero >= 57 && el.numero <= 71) {
+            grupoCorrigido = el.numero - 56; // 57->1, 58->2, ... 71->15
+            periodoCorrigido = 8;
+        }
+        // Actinídeos (89-103) devem ficar na LINHA 9 (abaixo dos lantanídeos)
+        else if (el.numero >= 89 && el.numero <= 103) {
+            grupoCorrigido = el.numero - 88; // 89->1, 90->2, ... 103->15
+            periodoCorrigido = 9;
+        }
+        
+        // Posicionamento na grade
+        div.style.gridColumn = grupoCorrigido;
+        div.style.gridRow = periodoCorrigido;
+        
+        // DEBUG: Adicionar atributo para identificar
+        div.setAttribute("data-numero", el.numero);
+        
+        // Conteúdo do elemento - versão mobile mostra apenas número e símbolo
         if (deviceInfo.isMobile) {
             div.innerHTML = `
                 <div class="numero">${el.numero}</div>
@@ -1878,42 +1878,144 @@ function criarElementos() {
             `;
         }
         
-        // Evento de clique (funciona em ambos)
+        // Eventos de clique e touch
         div.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             mostrarInfo(el);
         });
         
-        // Efeito visual para mobile
-        if (deviceInfo.isMobile) {
-            div.addEventListener('touchstart', () => {
-                div.style.background = 'white';
-                div.style.color = 'black';
-            });
-            div.addEventListener('touchend', () => {
-                div.style.background = '';
-                div.style.color = '';
-            });
-        }
+        div.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            div.style.background = 'rgba(255,255,255,0.2)';
+            div.style.transform = 'scale(0.98)';
+        });
+        
+        div.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            div.style.background = '';
+            div.style.transform = '';
+            mostrarInfo(el);
+        });
+        
+        div.addEventListener('touchcancel', (e) => {
+            e.preventDefault();
+            div.style.background = '';
+            div.style.transform = '';
+        });
         
         tabela.appendChild(div);
     });
+    
+    // CRIAR ESPAÇOS VAZIOS para as posições originais
+    
+    // Linha 6 (período 6) - colunas 4 a 18 ficam vazias
+    for (let col = 4; col <= 18; col++) {
+        const espaco = document.createElement("div");
+        espaco.classList.add("elemento", "espaco-vazio");
+        espaco.style.gridColumn = col;
+        espaco.style.gridRow = 6;
+        espaco.style.opacity = "0";
+        espaco.style.pointerEvents = "none";
+        espaco.style.border = "none";
+        espaco.style.background = "transparent";
+        espaco.style.boxShadow = "none";
+        tabela.appendChild(espaco);
+    }
+    
+    // Linha 7 (período 7) - colunas 4 a 18 ficam vazias
+    for (let col = 4; col <= 18; col++) {
+        const espaco = document.createElement("div");
+        espaco.classList.add("elemento", "espaco-vazio");
+        espaco.style.gridColumn = col;
+        espaco.style.gridRow = 7;
+        espaco.style.opacity = "0";
+        espaco.style.pointerEvents = "none";
+        espaco.style.border = "none";
+        espaco.style.background = "transparent";
+        espaco.style.boxShadow = "none";
+        tabela.appendChild(espaco);
+    }
+    
+    // COMPLETAR LINHA 8 (lantanídeos) com espaços vazios nas colunas 16-18
+    for (let col = 16; col <= 18; col++) {
+        const espaco = document.createElement("div");
+        espaco.classList.add("elemento", "espaco-vazio");
+        espaco.style.gridColumn = col;
+        espaco.style.gridRow = 8;
+        espaco.style.opacity = "0";
+        espaco.style.pointerEvents = "none";
+        espaco.style.border = "none";
+        espaco.style.background = "transparent";
+        espaco.style.boxShadow = "none";
+        tabela.appendChild(espaco);
+    }
+    
+    // COMPLETAR LINHA 9 (actinídeos) com espaços vazios nas colunas 16-18
+    for (let col = 16; col <= 18; col++) {
+        const espaco = document.createElement("div");
+        espaco.classList.add("elemento", "espaco-vazio");
+        espaco.style.gridColumn = col;
+        espaco.style.gridRow = 9;
+        espaco.style.opacity = "0";
+        espaco.style.pointerEvents = "none";
+        espaco.style.border = "none";
+        espaco.style.background = "transparent";
+        espaco.style.boxShadow = "none";
+        tabela.appendChild(espaco);
+    }
+    
+    // Adicionar LABELS para identificar as séries
+    const labelLantanideos = document.createElement("div");
+    labelLantanideos.style.gridColumn = "1/3";
+    labelLantanideos.style.gridRow = "8";
+    labelLantanideos.style.color = "#d4a5a5";
+    labelLantanideos.style.fontSize = "10px";
+    labelLantanideos.style.display = "flex";
+    labelLantanideos.style.alignItems = "center";
+    labelLantanideos.style.justifyContent = "center";
+    labelLantanideos.style.textShadow = "0 0 5px #d4a5a5";
+    labelLantanideos.style.fontWeight = "bold";
+    tabela.appendChild(labelLantanideos);
+    
+    const labelActinideos = document.createElement("div");
+    labelActinideos.style.gridColumn = "1/3";
+    labelActinideos.style.gridRow = "9";
+    labelActinideos.style.color = "#9b5de5";
+    labelActinideos.style.fontSize = "10px";
+    labelActinideos.style.display = "flex";
+    labelActinideos.style.alignItems = "center";
+    labelActinideos.style.justifyContent = "center";
+    labelActinideos.style.textShadow = "0 0 5px #9b5de5";
+    labelActinideos.style.fontWeight = "bold";
+    tabela.appendChild(labelActinideos);
+    
+    // DEBUG: Verificar no console
+    console.log("Total de elementos criados:", elementos.length);
+    console.log("Lutécio (71):", elementos.find(el => el.numero === 71));
+    console.log("Laurêncio (103):", elementos.find(el => el.numero === 103));
 }
 
-// 🔴 AGORA sim, chamar a função depois que tudo está definido
+// Inicializar tabela
 criarElementos();
 
-// Alternar visualização compacta
+// Alternar visualização compacta para mobile
 if (toggleViewBtn) {
     toggleViewBtn.addEventListener('click', () => {
         compactMode = !compactMode;
-        tabela.classList.toggle('compact-view');
-        toggleViewBtn.textContent = compactMode ? 'Visualização Normal' : 'Visualização Compacta';
+        if (compactMode) {
+            tabela.classList.add('compact-view');
+            toggleViewBtn.textContent = 'Visualização Normal';
+        } else {
+            tabela.classList.remove('compact-view');
+            toggleViewBtn.textContent = 'Visualização Compacta';
+        }
     });
 }
 
-// Função para mostrar informações
+// Função para mostrar informações do elemento
 function mostrarInfo(el) {
+    // Preencher dados
     document.getElementById("nome-elemento").textContent = el.nome;
     document.getElementById("simbolo").textContent = el.simbolo;
     document.getElementById("numero").textContent = el.numero;
@@ -1924,7 +2026,10 @@ function mostrarInfo(el) {
     document.getElementById("historia").textContent = el.historia;
     document.getElementById("reacoes").textContent = el.reacoes;
     
+    // Mostrar info
     infoDiv.classList.remove("hidden");
+    
+    // Prevenir scroll do body
     document.body.style.overflow = 'hidden';
 }
 
@@ -1938,24 +2043,67 @@ fecharBtn.addEventListener('click', fecharInfo);
 
 // Fechar ao clicar fora
 infoDiv.addEventListener('click', (e) => {
-    if (e.target === infoDiv) fecharInfo();
+    if (e.target === infoDiv) {
+        fecharInfo();
+    }
 });
 
-// Suporte a swipe no mobile
+// Suporte a gestos de swipe para fechar em mobile
 if (deviceInfo.isMobile) {
     let touchStartY = 0;
+    let touchStartX = 0;
+    
     infoDiv.addEventListener('touchstart', (e) => {
         touchStartY = e.touches[0].clientY;
-    });
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    
     infoDiv.addEventListener('touchmove', (e) => {
-        if (e.touches[0].clientY - touchStartY > 50) fecharInfo();
-    });
+        const touchY = e.touches[0].clientY;
+        const touchX = e.touches[0].clientX;
+        const diffY = touchY - touchStartY;
+        const diffX = Math.abs(touchX - touchStartX);
+        
+        // Swipe para baixo (ignorar se for movimento horizontal)
+        if (diffY > 50 && diffX < 30) {
+            fecharInfo();
+        }
+    }, { passive: true });
 }
 
-// Tecla ESC
+// Suporte a tecla ESC
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !infoDiv.classList.contains('hidden')) fecharInfo();
+    if (e.key === 'Escape' && !infoDiv.classList.contains('hidden')) {
+        fecharInfo();
+    }
 });
 
 // Mensagem de boas-vindas
-console.log(`👋 Acessando de ${deviceInfo.device}`);
+console.log(`👋 Bem-vindo! Acessando de ${deviceInfo.device} (${deviceInfo.os})`);
+
+// Toast de boas-vindas para mobile
+if (deviceInfo.isMobile) {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: black;
+        color: #00ffff;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        z-index: 100;
+        border: 2px solid #00ffff;
+        box-shadow: 0 0 20px #00ffff;
+        text-shadow: 0 0 10px #00ffff;
+        animation: slideUp 3s forwards;
+    `;
+    toast.textContent = `📱 Modo ${deviceInfo.device} ativado`;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
