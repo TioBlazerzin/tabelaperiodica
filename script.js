@@ -1,4 +1,4 @@
-// Detecção de dispositivo
+// Detecção de dispositivo - DEFINIR PRIMEIRO!
 function detectDevice() {
     const ua = navigator.userAgent;
     const mobileKeywords = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone'];
@@ -32,16 +32,17 @@ function detectDevice() {
     return { device, os, browser, isMobile };
 }
 
+// 🔴 PRIMEIRO: Declarar deviceInfo
 const deviceInfo = detectDevice();
 console.log(`Dispositivo detectado: ${deviceInfo.device}, OS: ${deviceInfo.os}, Browser: ${deviceInfo.browser}`);
 
-// Adicionar classe ao body para estilização específica
+// Adicionar classe ao body
 document.body.classList.add(`device-${deviceInfo.device}`);
 if (deviceInfo.isMobile) {
     document.body.classList.add('is-mobile');
 }
 
-// Array elementos com todos os 118 elementos
+// Array elementos (MANTÉM SEU ARRAY COMPLETO AQUI - só copiei os primeiros como exemplo)
 const elementos = [
     // Período 1
     {
@@ -1847,15 +1848,13 @@ let compactMode = false;
 // Limpar tabela
 tabela.innerHTML = "";
 
-// Função para criar elementos da tabela
+// 🔴 CORREÇÃO: Função para criar elementos
 function criarElementos() {
-    tabela.innerHTML = "";
-    
     elementos.forEach(el => {
         const div = document.createElement("div");
         div.classList.add("elemento");
         
-        // Adicionar atributo de categoria para cores
+        // Adicionar atributo de categoria
         if (el.categoria) {
             div.setAttribute("data-categoria", el.categoria);
         }
@@ -1864,30 +1863,34 @@ function criarElementos() {
         div.style.gridColumn = el.grupo;
         div.style.gridRow = el.periodo;
         
-        // Conteúdo do elemento
-        div.innerHTML = `
-            <div class="numero">${el.numero}</div>
-            <div class="simbolo">${el.simbolo}</div>
-            <div class="nome">${deviceInfo.isMobile ? '' : el.nome}</div>
-            <div class="massa">${deviceInfo.isMobile ? '' : el.massa}</div>
-        `;
+        // 🔴 CORREÇÃO: Mostrar nome e massa apenas em desktop
+        if (deviceInfo.isMobile) {
+            div.innerHTML = `
+                <div class="numero">${el.numero}</div>
+                <div class="simbolo">${el.simbolo}</div>
+            `;
+        } else {
+            div.innerHTML = `
+                <div class="numero">${el.numero}</div>
+                <div class="simbolo">${el.simbolo}</div>
+                <div class="nome">${el.nome}</div>
+                <div class="massa">${el.massa}</div>
+            `;
+        }
         
-        // Evento de clique com suporte a touch
+        // Evento de clique (funciona em ambos)
         div.addEventListener('click', (e) => {
             e.preventDefault();
             mostrarInfo(el);
         });
         
-        // Suporte a touch para mobile
+        // Efeito visual para mobile
         if (deviceInfo.isMobile) {
-            div.addEventListener('touchstart', (e) => {
-                e.preventDefault();
+            div.addEventListener('touchstart', () => {
                 div.style.background = 'white';
                 div.style.color = 'black';
             });
-            
-            div.addEventListener('touchend', (e) => {
-                e.preventDefault();
+            div.addEventListener('touchend', () => {
                 div.style.background = '';
                 div.style.color = '';
             });
@@ -1897,26 +1900,20 @@ function criarElementos() {
     });
 }
 
-// Inicializar tabela
+// 🔴 AGORA sim, chamar a função depois que tudo está definido
 criarElementos();
 
-// Alternar visualização compacta para mobile
+// Alternar visualização compacta
 if (toggleViewBtn) {
     toggleViewBtn.addEventListener('click', () => {
         compactMode = !compactMode;
-        if (compactMode) {
-            tabela.classList.add('compact-view');
-            toggleViewBtn.textContent = 'Visualização Normal';
-        } else {
-            tabela.classList.remove('compact-view');
-            toggleViewBtn.textContent = 'Visualização Compacta';
-        }
+        tabela.classList.toggle('compact-view');
+        toggleViewBtn.textContent = compactMode ? 'Visualização Normal' : 'Visualização Compacta';
     });
 }
 
-// Função para mostrar informações do elemento
+// Função para mostrar informações
 function mostrarInfo(el) {
-    // Preencher dados
     document.getElementById("nome-elemento").textContent = el.nome;
     document.getElementById("simbolo").textContent = el.simbolo;
     document.getElementById("numero").textContent = el.numero;
@@ -1927,16 +1924,8 @@ function mostrarInfo(el) {
     document.getElementById("historia").textContent = el.historia;
     document.getElementById("reacoes").textContent = el.reacoes;
     
-    // Mostrar info
     infoDiv.classList.remove("hidden");
-    
-    // Prevenir scroll do body quando info está aberta
     document.body.style.overflow = 'hidden';
-    
-    // Se for mobile, adicionar classe especial
-    if (deviceInfo.isMobile) {
-        infoDiv.classList.add('mobile-info');
-    }
 }
 
 // Fechar info
@@ -1949,92 +1938,24 @@ fecharBtn.addEventListener('click', fecharInfo);
 
 // Fechar ao clicar fora
 infoDiv.addEventListener('click', (e) => {
-    if (e.target === infoDiv) {
-        fecharInfo();
-    }
+    if (e.target === infoDiv) fecharInfo();
 });
 
-// Suporte a gestos de swipe para fechar em mobile
+// Suporte a swipe no mobile
 if (deviceInfo.isMobile) {
     let touchStartY = 0;
-    
     infoDiv.addEventListener('touchstart', (e) => {
         touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    
+    });
     infoDiv.addEventListener('touchmove', (e) => {
-        const touchY = e.touches[0].clientY;
-        const diff = touchY - touchStartY;
-        
-        if (diff > 50) { // Swipe para baixo
-            fecharInfo();
-        }
-    }, { passive: true });
+        if (e.touches[0].clientY - touchStartY > 50) fecharInfo();
+    });
 }
 
-// Ajustar layout quando orientação mudar (mobile)
-window.addEventListener('resize', () => {
-    const wasMobile = deviceInfo.isMobile;
-    const newIsMobile = window.innerWidth <= 768;
-    
-    // Se mudou de desktop para mobile ou vice-versa
-    if (wasMobile !== newIsMobile) {
-        location.reload(); // Recarrega para ajustar layout
-    }
-});
-
-// Prevenir zoom acidental em inputs no mobile
-if (deviceInfo.isMobile) {
-    document.addEventListener('touchmove', (e) => {
-        if (e.target.closest('.info-box')) {
-            e.stopPropagation();
-        }
-    }, { passive: false });
-}
-
-// Suporte a tecla ESC para fechar
+// Tecla ESC
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !infoDiv.classList.contains('hidden')) {
-        fecharInfo();
-    }
+    if (e.key === 'Escape' && !infoDiv.classList.contains('hidden')) fecharInfo();
 });
 
-// Mostrar mensagem de boas-vindas com detecção
-console.log(`👋 Bem-vindo! Acessando de ${deviceInfo.device} (${deviceInfo.os})`);
-
-// Opcional: mostrar toast de boas-vindas
-if (deviceInfo.isMobile) {
-    const toast = document.createElement('div');
-    toast.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: white;
-        color: black;
-        padding: 10px 20px;
-        border-radius: 25px;
-        font-size: 14px;
-        z-index: 100;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        animation: slideUp 3s forwards;
-    `;
-    toast.textContent = `📱 Modo ${deviceInfo.device} ativado`;
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.remove();
-    }, 3000);
-}
-
-// Adicionar estilo para animação
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideUp {
-        0% { bottom: -50px; opacity: 0; }
-        10% { bottom: 20px; opacity: 1; }
-        90% { bottom: 20px; opacity: 1; }
-        100% { bottom: -50px; opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
+// Mensagem de boas-vindas
+console.log(`👋 Acessando de ${deviceInfo.device}`);
