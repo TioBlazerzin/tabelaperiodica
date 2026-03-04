@@ -1,0 +1,358 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: black;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 10px 0;
+    color: white;
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* Botão de alternar visualização - visível apenas em mobile */
+#toggleView {
+    display: none;
+    background: white;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px auto;
+    cursor: pointer;
+    border: 2px solid white;
+    transition: all 0.3s;
+}
+
+#toggleView:hover {
+    background: black;
+    color: white;
+}
+
+/* Tabela periódica - grid responsivo */
+#tabela {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    gap: 2px;
+    justify-content: center;
+    margin: 10px auto;
+    padding: 5px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Visualização compacta para mobile */
+#tabela.compact-view {
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.elemento {
+    border: 1px solid white;
+    aspect-ratio: 3/4;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 2px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(8px, 2vw, 14px);
+    border-radius: 4px;
+}
+
+.elemento:hover,
+.elemento:active {
+    background: white;
+    color: black;
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+}
+
+.numero {
+    font-size: 0.7em;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+}
+
+.simbolo {
+    font-size: clamp(12px, 3vw, 22px);
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.nome {
+    font-size: 0.6em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 2px;
+}
+
+.massa {
+    font-size: 0.5em;
+    opacity: 0.8;
+}
+
+/* Cores por categoria */
+.elemento[data-categoria="gás-nobre"] { border-color: #ff6b6b; }
+.elemento[data-categoria="halogênio"] { border-color: #4ecdc4; }
+.elemento[data-categoria="metal-alcalino"] { border-color: #ffe66d; }
+.elemento[data-categoria="metal-alcalino-terroso"] { border-color: #ff9f1c; }
+.elemento[data-categoria="semimetal"] { border-color: #2ec4b6; }
+.elemento[data-categoria="não-metal"] { border-color: #e71d36; }
+.elemento[data-categoria="metal-transição"] { border-color: #a8e6cf; }
+.elemento[data-categoria="lantanídeo"] { border-color: #d4a5a5; }
+.elemento[data-categoria="actinídeo"] { border-color: #9b5de5; }
+.elemento[data-categoria="metal"] { border-color: #f9d56e; }
+
+/* Janela de informações - otimizada para mobile */
+#info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.info-box {
+    background: black;
+    border: 2px solid white;
+    padding: 20px;
+    width: min(95%, 450px);
+    max-height: 90vh;
+    text-align: left;
+    position: relative;
+    overflow-y: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+}
+
+#fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+    z-index: 1001;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+#fechar:hover,
+#fechar:active {
+    color: #ff6666;
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.2);
+}
+
+.info-box h2 {
+    margin-top: 0;
+    color: white;
+    border-bottom: 2px solid white;
+    padding-bottom: 15px;
+    font-size: clamp(20px, 5vw, 28px);
+    padding-right: 30px;
+}
+
+.info-content {
+    margin-top: 15px;
+}
+
+.info-box p {
+    margin: 12px 0;
+    font-size: clamp(14px, 4vw, 16px);
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.info-box strong {
+    color: #4ecdc4;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Media queries para diferentes tamanhos de tela */
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+    
+    #tabela {
+        gap: 1px;
+    }
+    
+    .elemento {
+        border-width: 1px;
+    }
+    
+    .numero {
+        font-size: 0.6em;
+    }
+    
+    .nome {
+        display: none; /* Esconde o nome em telas muito pequenas */
+    }
+    
+    .massa {
+        display: none; /* Esconde a massa em telas muito pequenas */
+    }
+    
+    .simbolo {
+        font-size: clamp(14px, 4vw, 20px);
+        margin-top: 5px;
+    }
+    
+    /* Mostra o botão de alternar apenas em mobile */
+    #toggleView {
+        display: block;
+    }
+    
+    .info-box {
+        padding: 15px;
+    }
+    
+    .info-box p {
+        margin: 8px 0;
+    }
+    
+    .info-box strong {
+        min-width: 100px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .elemento {
+        aspect-ratio: 2/3;
+    }
+    
+    .simbolo {
+        font-size: clamp(12px, 3.5vw, 18px);
+    }
+    
+    .numero {
+        font-size: 0.5em;
+    }
+    
+    .info-box strong {
+        display: block;
+        min-width: auto;
+        margin-bottom: 3px;
+    }
+    
+    .info-box p {
+        margin: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 5px;
+    }
+    
+    .info-box p:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Suporte para telas muito pequenas */
+@media (max-width: 320px) {
+    #tabela {
+        gap: 1px;
+    }
+    
+    .simbolo {
+        font-size: 10px;
+    }
+    
+    .numero {
+        font-size: 6px;
+    }
+}
+
+/* Detecção de dispositivo via JavaScript */
+.device-detected {
+    padding: 5px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+/* Animação de carregamento */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Orientação paisagem em mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    #tabela.compact-view {
+        grid-template-columns: repeat(12, 1fr);
+    }
+    
+    .elemento {
+        aspect-ratio: 3/4;
+    }
+    
+    .nome, .massa {
+        display: block;
+        font-size: 0.5em;
+    }
+}

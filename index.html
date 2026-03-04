@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Tabela Periódica Interativa - Mobile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>TABELA PERIÓDICA</h1>
+    
+    <!-- Botão para alternar visualização em mobile -->
+    <button id="toggleView" class="mobile-only">Alternar Visualização</button>
+    
+    <div id="tabela"></div>
+</div>
+
+<div id="info" class="hidden">
+    <div class="info-box">
+        <span id="fechar">×</span>
+        <h2 id="nome-elemento"></h2>
+        <div class="info-content">
+            <p><strong>Símbolo:</strong> <span id="simbolo"></span></p>
+            <p><strong>Número Atômico:</strong> <span id="numero"></span></p>
+            <p><strong>Prótons:</strong> <span id="protons"></span></p>
+            <p><strong>Nêutrons:</strong> <span id="neutrons"></span></p>
+            <p><strong>Elétrons:</strong> <span id="eletrons"></span></p>
+            <p><strong>Configuração Eletrônica:</strong> <span id="config"></span></p>
+            <p><strong>História:</strong> <span id="historia"></span></p>
+            <p><strong>Reações Químicas:</strong> <span id="reacoes"></span></p>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
