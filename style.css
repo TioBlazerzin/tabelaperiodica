@@ -13,58 +13,61 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 10px;
+    padding: 5px;
 }
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 h1 {
-    margin: 10px 0;
+    margin: 5px 0;
     color: white;
-    font-size: clamp(1.2rem, 5vw, 2rem);
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    font-size: clamp(1rem, 4vw, 1.8rem);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3);
+    letter-spacing: 2px;
 }
 
 /* Botão de alternar visualização - visível apenas em mobile */
 #toggleView {
     display: none;
-    background: white;
-    color: black;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 10px auto;
-    cursor: pointer;
-    border: 2px solid white;
-    transition: all 0.3s;
-}
-
-#toggleView:hover {
     background: black;
     color: white;
+    border: 2px solid #00ffff;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px auto;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px #00ffff;
 }
 
-/* Tabela periódica - grid responsivo */
+#toggleView:hover,
+#toggleView:active {
+    background: #00ffff;
+    color: black;
+    box-shadow: 0 0 20px #00ffff;
+}
+
+/* Tabela periódica - grid responsivo - TAMANHO REDUZIDO */
 #tabela {
     display: grid;
-    grid-template-columns: repeat(18, 1fr);
+    grid-template-columns: repeat(18, minmax(35px, 65px));
     gap: 2px;
     justify-content: center;
-    margin: 10px auto;
-    padding: 5px;
+    margin: 5px auto;
+    padding: 3px;
     width: 100%;
     transition: all 0.3s ease;
 }
 
 /* Visualização compacta para mobile */
 #tabela.compact-view {
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(9, minmax(40px, 1fr));
 }
 
 .elemento {
@@ -80,17 +83,69 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: clamp(8px, 2vw, 14px);
+    font-size: clamp(7px, 1.8vw, 12px);
     border-radius: 4px;
+}
+
+/* Efeito NEON nos símbolos - LETRAS BRANCAS COM BRILHO COLORIDO */
+.simbolo {
+    font-size: clamp(12px, 2.5vw, 20px);
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 2px;
+    transition: all 0.3s;
+    color: white !important; /* Força letras brancas */
+}
+
+/* Cores do NEON por categoria (afeta o brilho, NÃO a cor da letra) */
+.elemento[data-categoria="gás-nobre"] .simbolo { 
+    text-shadow: 0 0 5px #ff6b6b, 0 0 10px #ff6b6b, 0 0 15px #ff6b6b;
+}
+.elemento[data-categoria="halogênio"] .simbolo { 
+    text-shadow: 0 0 5px #4ecdc4, 0 0 10px #4ecdc4, 0 0 15px #4ecdc4;
+}
+.elemento[data-categoria="metal-alcalino"] .simbolo { 
+    text-shadow: 0 0 5px #ffe66d, 0 0 10px #ffe66d, 0 0 15px #ffe66d;
+}
+.elemento[data-categoria="metal-alcalino-terroso"] .simbolo { 
+    text-shadow: 0 0 5px #ff9f1c, 0 0 10px #ff9f1c, 0 0 15px #ff9f1c;
+}
+.elemento[data-categoria="semimetal"] .simbolo { 
+    text-shadow: 0 0 5px #2ec4b6, 0 0 10px #2ec4b6, 0 0 15px #2ec4b6;
+}
+.elemento[data-categoria="não-metal"] .simbolo { 
+    text-shadow: 0 0 5px #e71d36, 0 0 10px #e71d36, 0 0 15px #e71d36;
+}
+.elemento[data-categoria="metal-transição"] .simbolo { 
+    text-shadow: 0 0 5px #a8e6cf, 0 0 10px #a8e6cf, 0 0 15px #a8e6cf;
+}
+.elemento[data-categoria="lantanídeo"] .simbolo { 
+    text-shadow: 0 0 5px #d4a5a5, 0 0 10px #d4a5a5, 0 0 15px #d4a5a5;
+}
+.elemento[data-categoria="actinídeo"] .simbolo { 
+    text-shadow: 0 0 5px #9b5de5, 0 0 10px #9b5de5, 0 0 15px #9b5de5;
+}
+.elemento[data-categoria="metal"] .simbolo { 
+    text-shadow: 0 0 5px #f9d56e, 0 0 10px #f9d56e, 0 0 15px #f9d56e;
+}
+
+/* Efeito hover - intensifica o brilho */
+.elemento:hover .simbolo {
+    text-shadow: 
+        0 0 10px currentColor, 
+        0 0 20px currentColor, 
+        0 0 30px currentColor,
+        0 0 40px currentColor !important;
+    transform: scale(1.1);
 }
 
 .elemento:hover,
 .elemento:active {
-    background: white;
-    color: black;
+    background: rgba(255,255,255,0.1);
+    border-color: currentColor;
     transform: scale(1.02);
     z-index: 10;
-    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    box-shadow: 0 0 20px currentColor;
 }
 
 .numero {
@@ -98,30 +153,41 @@ h1 {
     position: absolute;
     top: 2px;
     left: 3px;
+    opacity: 0.8;
+    color: white;
+    text-shadow: 0 0 5px currentColor;
 }
 
-.simbolo {
-    font-size: clamp(12px, 3vw, 22px);
-    font-weight: bold;
-    line-height: 1;
-    margin-bottom: 2px;
-}
+/* Cores para o número (baseado na categoria) */
+.elemento[data-categoria="gás-nobre"] .numero { color: #ff6b6b; }
+.elemento[data-categoria="halogênio"] .numero { color: #4ecdc4; }
+.elemento[data-categoria="metal-alcalino"] .numero { color: #ffe66d; }
+.elemento[data-categoria="metal-alcalino-terroso"] .numero { color: #ff9f1c; }
+.elemento[data-categoria="semimetal"] .numero { color: #2ec4b6; }
+.elemento[data-categoria="não-metal"] .numero { color: #e71d36; }
+.elemento[data-categoria="metal-transição"] .numero { color: #a8e6cf; }
+.elemento[data-categoria="lantanídeo"] .numero { color: #d4a5a5; }
+.elemento[data-categoria="actinídeo"] .numero { color: #9b5de5; }
+.elemento[data-categoria="metal"] .numero { color: #f9d56e; }
 
 .nome {
-    font-size: 0.6em;
+    font-size: 0.55em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
     padding: 0 2px;
+    opacity: 0.9;
+    color: white;
 }
 
 .massa {
-    font-size: 0.5em;
-    opacity: 0.8;
+    font-size: 0.45em;
+    opacity: 0.7;
+    color: white;
 }
 
-/* Cores por categoria */
+/* Bordas coloridas por categoria */
 .elemento[data-categoria="gás-nobre"] { border-color: #ff6b6b; }
 .elemento[data-categoria="halogênio"] { border-color: #4ecdc4; }
 .elemento[data-categoria="metal-alcalino"] { border-color: #ffe66d; }
@@ -159,7 +225,8 @@ h1 {
     position: relative;
     overflow-y: auto;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+    box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    border-color: #00ffff;
 }
 
 #fechar {
@@ -167,7 +234,7 @@ h1 {
     top: 10px;
     right: 15px;
     cursor: pointer;
-    color: red;
+    color: #ff4d4d;
     font-size: 30px;
     font-weight: bold;
     z-index: 1001;
@@ -179,39 +246,44 @@ h1 {
     background: rgba(255,255,255,0.1);
     border-radius: 50%;
     transition: all 0.3s;
+    text-shadow: 0 0 10px #ff4d4d;
 }
 
 #fechar:hover,
 #fechar:active {
-    color: #ff6666;
-    transform: scale(1.1);
+    color: #ff0000;
+    transform: scale(1.1) rotate(90deg);
     background: rgba(255,255,255,0.2);
+    text-shadow: 0 0 20px #ff0000;
 }
 
 .info-box h2 {
     margin-top: 0;
     color: white;
-    border-bottom: 2px solid white;
-    padding-bottom: 15px;
-    font-size: clamp(20px, 5vw, 28px);
+    border-bottom: 2px solid #00ffff;
+    padding-bottom: 12px;
+    font-size: clamp(18px, 5vw, 24px);
     padding-right: 30px;
+    text-shadow: 0 0 10px #00ffff;
 }
 
 .info-content {
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
 .info-box p {
-    margin: 12px 0;
-    font-size: clamp(14px, 4vw, 16px);
+    margin: 10px 0;
+    font-size: clamp(13px, 4vw, 15px);
     line-height: 1.5;
     word-wrap: break-word;
+    color: white;
 }
 
 .info-box strong {
-    color: #4ecdc4;
+    color: #00ffff;
     display: inline-block;
     min-width: 120px;
+    text-shadow: 0 0 5px #00ffff;
 }
 
 .hidden {
@@ -221,76 +293,84 @@ h1 {
 /* Media queries para diferentes tamanhos de tela */
 @media (max-width: 768px) {
     body {
-        padding: 5px;
+        padding: 3px;
     }
     
     #tabela {
+        grid-template-columns: repeat(18, minmax(28px, 1fr));
         gap: 1px;
     }
     
     .elemento {
         border-width: 1px;
-    }
-    
-    .numero {
-        font-size: 0.6em;
-    }
-    
-    .nome {
-        display: none; /* Esconde o nome em telas muito pequenas */
-    }
-    
-    .massa {
-        display: none; /* Esconde a massa em telas muito pequenas */
-    }
-    
-    .simbolo {
-        font-size: clamp(14px, 4vw, 20px);
-        margin-top: 5px;
-    }
-    
-    /* Mostra o botão de alternar apenas em mobile */
-    #toggleView {
-        display: block;
-    }
-    
-    .info-box {
-        padding: 15px;
-    }
-    
-    .info-box p {
-        margin: 8px 0;
-    }
-    
-    .info-box strong {
-        min-width: 100px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .elemento {
         aspect-ratio: 2/3;
-    }
-    
-    .simbolo {
-        font-size: clamp(12px, 3.5vw, 18px);
     }
     
     .numero {
         font-size: 0.5em;
     }
     
-    .info-box strong {
+    .nome {
+        display: none;
+    }
+    
+    .massa {
+        display: none;
+    }
+    
+    .simbolo {
+        font-size: clamp(10px, 3.5vw, 16px);
+        margin-top: 5px;
+    }
+    
+    #toggleView {
         display: block;
-        min-width: auto;
-        margin-bottom: 3px;
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+    
+    .info-box {
+        padding: 12px;
     }
     
     .info-box p {
-        margin: 10px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        padding-bottom: 5px;
+        margin: 6px 0;
+    }
+    
+    .info-box strong {
+        min-width: 90px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    #tabela {
+        grid-template-columns: repeat(18, minmax(22px, 1fr));
+        gap: 1px;
+    }
+    
+    .elemento {
+        aspect-ratio: 2/3;
+    }
+    
+    .simbolo {
+        font-size: clamp(8px, 3vw, 13px);
+    }
+    
+    .numero {
+        font-size: 0.4em;
+    }
+    
+    .info-box strong {
+        display: block;
+        min-width: auto;
+        margin-bottom: 2px;
+    }
+    
+    .info-box p {
+        margin: 8px 0;
+        border-bottom: 1px solid rgba(0,255,255,0.2);
+        padding-bottom: 4px;
     }
     
     .info-box p:last-child {
@@ -298,61 +378,47 @@ h1 {
     }
 }
 
-/* Suporte para telas muito pequenas */
 @media (max-width: 320px) {
     #tabela {
+        grid-template-columns: repeat(18, minmax(18px, 1fr));
         gap: 1px;
     }
     
     .simbolo {
-        font-size: 10px;
+        font-size: 7px;
     }
     
     .numero {
-        font-size: 6px;
-    }
-}
-
-/* Detecção de dispositivo via JavaScript */
-.device-detected {
-    padding: 5px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    margin: 5px 0;
-}
-
-/* Animação de carregamento */
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-.loading {
-    animation: pulse 1.5s infinite;
-}
-
-/* Melhorias de acessibilidade */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        font-size: 5px;
     }
 }
 
 /* Orientação paisagem em mobile */
 @media (max-width: 768px) and (orientation: landscape) {
     #tabela.compact-view {
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(12, minmax(35px, 1fr));
     }
     
     .elemento {
         aspect-ratio: 3/4;
     }
-    
-    .nome, .massa {
-        display: block;
-        font-size: 0.5em;
-    }
+}
+
+/* Animações */
+@keyframes neonPulse {
+    0% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor; }
+    50% { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
+    100% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor; }
+}
+
+.simbolo {
+    animation: neonPulse 3s infinite;
+}
+
+/* Classe para espaços vazios */
+.espaco-vazio {
+    opacity: 0;
+    pointer-events: none;
+    border: none;
+    box-shadow: none;
 }
