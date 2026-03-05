@@ -1911,6 +1911,7 @@ let touchStartTime = 0;
 let touchMoved = false;
 
 function handleTouchStart(e) {
+    e.preventDefault(); // Previne o comportamento padrão
     touchElement = this;
     touchStartTime = Date.now();
     touchMoved = false;
@@ -1925,9 +1926,12 @@ function handleTouchStart(e) {
             const elemento = elementos.find(el => el.numero === numero);
             if (elemento) {
                 mostrarInfo(elemento);
+                // Vibrar se suportado (feedback tátil)
+                if (navigator.vibrate) navigator.vibrate(50);
             }
         }
         touchElement = null;
+        touchTimer = null;
     }, LONG_PRESS_DURATION);
 }
 
@@ -1944,14 +1948,22 @@ function handleTouchMove(e) {
 }
 
 function handleTouchEnd(e) {
+    e.preventDefault(); // Previne comportamento padrão
+    
     if (touchTimer) {
         clearTimeout(touchTimer);
         touchTimer = null;
     }
 
-    // Se não houve movimento e o tempo foi curto, é um toque simples
+    // Se não houve movimento, é um toque válido
     if (!touchMoved && touchElement && (Date.now() - touchStartTime) < LONG_PRESS_DURATION) {
-        // Não fazer nada no toque simples - permitir scroll
+        // Dispara a ação para toque simples
+        const numero = parseInt(touchElement.getAttribute('data-numero'));
+        const elemento = elementos.find(el => el.numero === numero);
+        if (elemento) {
+            mostrarInfo(elemento);
+            if (navigator.vibrate) navigator.vibrate(20); // Feedback leve
+        }
     }
 
     if (touchElement) {
@@ -1970,6 +1982,187 @@ function handleTouchCancel(e) {
         touchElement = null;
     }
 }
+
+
+// Adicionar suporte touch para botões de navegação
+function adicionarSuporteTouchBotoes() {
+    const botoes = [
+        btnTabela,
+        btnEstados,
+        voltarTabela,
+        voltarEstados,
+        btnFamilias,
+        fecharFamilias,
+        toggleViewBtn,
+        fecharBtn
+    ];
+
+    botoes.forEach(btn => {
+        if (!btn) return;
+        
+        // Remove eventos antigos
+        btn.removeEventListener('touchstart', handleBotaoTouchStart);
+        btn.removeEventListener('touchend', handleBotaoTouchEnd);
+        btn.removeEventListener('touchcancel', handleBotaoTouchCancel);
+        
+        // Adiciona novos eventos
+        btn.addEventListener('touchstart', handleBotaoTouchStart, { passive: false });
+        btn.addEventListener('touchend', handleBotaoTouchEnd, { passive: false });
+        btn.addEventListener('touchcancel', handleBotaoTouchCancel);
+        
+        // Mantém clique para desktop
+        if (!btn.hasClickListener) {
+            btn.hasClickListener = true;
+        }
+    });
+}
+
+function handleBotaoTouchStart(e) {
+    e.preventDefault();
+    this.style.transform = 'scale(0.95)';
+    this.style.transition = 'transform 0.1s';
+    if (navigator.vibrate) navigator.vibrate(10);
+}
+
+function handleBotaoTouchEnd(e) {
+    e.preventDefault();
+    this.style.transform = 'scale(1)';
+    
+    // Dispara o clique do botão
+    if (this.id === 'btn-tabela') {
+        menuPrincipal.classList.add('hidden');
+        telaTabela.classList.remove('hidden');
+    } else if (this.id === 'btn-estados') {
+        menuPrincipal.classList.add('hidden');
+        telaEstados.classList.remove('hidden');
+    } else if (this.id === 'voltar-tabela') {
+        telaTabela.classList.add('hidden');
+        menuPrincipal.classList.remove('hidden');
+    } else if (this.id === 'voltar-estados') {
+        telaEstados.classList.add('hidden');
+        menuPrincipal.classList.remove('hidden');
+    } else if (this.id === 'btn-familias') {
+        painelFamilias.classList.remove('hidden');
+    } else if (this.id === 'fechar-familias') {
+        painelFamilias.classList.add('hidden');
+    } else if (this.id === 'toggleView') {
+        compactMode = !compactMode;
+        if (compactMode) {
+            tabelaDiv.classList.add('compact-view');
+            toggleViewBtn.textContent = '📊 Normal';
+        } else {
+            tabelaDiv.classList.remove('compact-view');
+            toggleViewBtn.textContent = '🔍 Compactar';
+        }
+    } else if (this.id === 'fechar') {
+        fecharInfo();
+    }
+}
+
+function handleBotaoTouchCancel(e) {
+    this.style.transform = 'scale(1)';
+}
+
+// Navegação entre telas (manter os eventos de clique para desktop)
+btnTabela.addEventListener('click', () => {
+    if (!deviceInfo.isMobile) {
+        menuPrincipal.classList.add('hidden');
+        telaTabela.classList.remove('hidden');
+    }
+});
+
+btnEstados.addEventListener('click', () => {
+    if (!deviceInfo.isMobile) {
+        menuPrincipal.classList.add('hidden');
+        telaEstados.classList.remove('hidden');
+    }
+});
+
+voltarTabela.addEventListener('click', () => {
+    if (!deviceInfo.isMobile) {
+        telaTabela.classList.add('hidden');
+        menuPrincipal.classList.remove('hidden');
+    }
+});
+
+voltarEstados.addEventListener('click', () => {
+    if (!deviceInfo.isMobile) {
+        telaEstados.classList.add('hidden');
+        menuPrincipal.classList.remove('hidden');
+    }
+});
+
+// Inicializar tudo
+criarElementos();
+adicionarSuporteTouchBotoes();
+
+// Prevenir zoom em double-tap em toda a página
+document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Melhorar scroll da tabela
+if (tabelaScroll) {
+    tabelaScroll.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+    }, { passive: true });
+}
+
+// Aplicar cores nas famílias
+document.querySelectorAll('.familia-item').forEach(item => {
+    const cor = item.getAttribute('data-cor');
+    if (cor) {
+        item.style.borderLeftColor = cor;
+    }
+});
+
+// Mensagem de boas-vindas
+console.log(`🚀 App iniciado em modo: ${deviceInfo.device}`);
+
+// Toast de boas-vindas
+if (deviceInfo.isMobile) {
+    mostrarToast(`📱 Modo ${deviceInfo.device} ativado`);
+}
+
+function mostrarToast(mensagem) {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: black;
+        color: #00ffff;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        z-index: 3000;
+        border: 2px solid #00ffff;
+        box-shadow: 0 0 20px #00ffff;
+        text-shadow: 0 0 10px #00ffff;
+        animation: slideUp 3s forwards;
+    `;
+    toast.textContent = mensagem;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+// Adicionar animação slideUp se não existir
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideUp {
+        0% { bottom: -50px; opacity: 0; }
+        10% { bottom: 20px; opacity: 1; }
+        90% { bottom: 20px; opacity: 1; }
+        100% { bottom: -50px; opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
 
 function adicionarEspacosVazios() {
     // Mesma lógica do seu código para espaços vazios
