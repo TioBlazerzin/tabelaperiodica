@@ -30,12 +30,48 @@ function detectDevice() {
 }
 
 const deviceInfo = detectDevice();
-console.log(`Dispositivo detectado: ${deviceInfo.device}, OS: ${deviceInfo.os}, Browser: ${deviceInfo.browser}`);
 
-document.body.classList.add(`device-${deviceInfo.device}`);
-if (deviceInfo.isMobile) {
-    document.body.classList.add('is-mobile');
-}
+// Elementos da interface
+const menuPrincipal = document.getElementById('menu-principal');
+const telaTabela = document.getElementById('tela-tabela');
+const telaEstados = document.getElementById('tela-estados');
+const btnTabela = document.getElementById('btn-tabela');
+const btnEstados = document.getElementById('btn-estados');
+const voltarTabela = document.getElementById('voltar-tabela');
+const voltarEstados = document.getElementById('voltar-estados');
+const tabelaDiv = document.getElementById("tabela");
+const toggleViewBtn = document.getElementById("toggleView");
+const infoDiv = document.getElementById("info");
+const fecharBtn = document.getElementById("fechar");
+const btnFamilias = document.getElementById('btn-familias');
+const painelFamilias = document.getElementById('painel-familias');
+const fecharFamilias = document.getElementById('fechar-familias');
+const tabelaScroll = document.getElementById('tabela-scroll');
+
+let compactMode = false;
+let touchTimer = null;
+const LONG_PRESS_DURATION = 300; // ms
+
+// Navegação entre telas
+btnTabela.addEventListener('click', () => {
+    menuPrincipal.classList.add('hidden');
+    telaTabela.classList.remove('hidden');
+});
+
+btnEstados.addEventListener('click', () => {
+    menuPrincipal.classList.add('hidden');
+    telaEstados.classList.remove('hidden');
+});
+
+voltarTabela.addEventListener('click', () => {
+    telaTabela.classList.add('hidden');
+    menuPrincipal.classList.remove('hidden');
+});
+
+voltarEstados.addEventListener('click', () => {
+    telaEstados.classList.add('hidden');
+    menuPrincipal.classList.remove('hidden');
+});
 
 // Array elementos com configurações eletrônicas COMPLETAS (expandidas)
 const elementos = [
@@ -1812,210 +1848,180 @@ const elementos = [
     }
 ];
 
-// Elementos da interface
-const tabela = document.getElementById("tabela");
-const toggleViewBtn = document.getElementById("toggleView");
-const infoDiv = document.getElementById("info");
-const fecharBtn = document.getElementById("fechar");
-
-let compactMode = false;
-
-// Limpar tabela
-tabela.innerHTML = "";
-
-
-
-// Função para criar elementos da tabela
 // Função para criar elementos da tabela
 function criarElementos() {
-    // Primeiro, limpar a tabela
-    tabela.innerHTML = "";
-    
-    // Criar todos os elementos normais
+    tabelaDiv.innerHTML = "";
+
     elementos.forEach(el => {
         const div = document.createElement("div");
         div.classList.add("elemento");
-        
-        // Adicionar atributo de categoria
+
         if (el.categoria) {
             div.setAttribute("data-categoria", el.categoria);
         }
-        
-        // POSICIONAMENTO CORRETO NA TABELA PERIÓDICA
+
+        // Posicionamento
         let grupoCorrigido = el.grupo;
         let periodoCorrigido = el.periodo;
-        
-        // Lantanídeos (57-71) devem ficar na LINHA 8 (abaixo da tabela principal)
+
         if (el.numero >= 57 && el.numero <= 71) {
-            grupoCorrigido = el.numero - 56; // 57->1, 58->2, ... 71->15
+            grupoCorrigido = el.numero - 56;
             periodoCorrigido = 8;
-        }
-        // Actinídeos (89-103) devem ficar na LINHA 9 (abaixo dos lantanídeos)
-        else if (el.numero >= 89 && el.numero <= 103) {
-            grupoCorrigido = el.numero - 88; // 89->1, 90->2, ... 103->15
+        } else if (el.numero >= 89 && el.numero <= 103) {
+            grupoCorrigido = el.numero - 88;
             periodoCorrigido = 9;
         }
-        
-        // Posicionamento na grade
+
         div.style.gridColumn = grupoCorrigido;
         div.style.gridRow = periodoCorrigido;
-        
-        // DEBUG: Adicionar atributo para identificar
         div.setAttribute("data-numero", el.numero);
-        
-        // Conteúdo do elemento - versão mobile mostra apenas número e símbolo
-        if (deviceInfo.isMobile) {
-            div.innerHTML = `
-                <div class="numero">${el.numero}</div>
-                <div class="simbolo">${el.simbolo}</div>
-            `;
-        } else {
-            div.innerHTML = `
-                <div class="numero">${el.numero}</div>
-                <div class="simbolo">${el.simbolo}</div>
-                <div class="nome">${el.nome}</div>
-                <div class="massa">${el.massa}</div>
-            `;
-        }
-        
-        // Eventos de clique e touch
+
+        div.innerHTML = `
+            <div class="numero">${el.numero}</div>
+            <div class="simbolo">${el.simbolo}</div>
+            <div class="nome">${el.nome}</div>
+            <div class="massa">${el.massa}</div>
+        `;
+
+        // Eventos touch melhorados
+        div.addEventListener('touchstart', handleTouchStart, { passive: true });
+        div.addEventListener('touchend', handleTouchEnd);
+        div.addEventListener('touchcancel', handleTouchCancel);
+        div.addEventListener('touchmove', handleTouchMove);
+
+        // Click para desktop
         div.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            mostrarInfo(el);
+            if (!deviceInfo.isMobile) {
+                e.preventDefault();
+                e.stopPropagation();
+                mostrarInfo(el);
+            }
         });
-        
-        div.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            div.style.background = 'rgba(255,255,255,0.2)';
-            div.style.transform = 'scale(0.98)';
-        });
-        
-        div.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            div.style.background = '';
-            div.style.transform = '';
-            mostrarInfo(el);
-        });
-        
-        div.addEventListener('touchcancel', (e) => {
-            e.preventDefault();
-            div.style.background = '';
-            div.style.transform = '';
-        });
-        
-        tabela.appendChild(div);
+
+        tabelaDiv.appendChild(div);
     });
-    
-    // CRIAR ESPAÇOS VAZIOS para as posições originais
-    
-    // Linha 6 (período 6) - colunas 4 a 18 ficam vazias
+
+    // Adicionar espaços vazios (mesma lógica do seu código)
+    adicionarEspacosVazios();
+}
+
+// Handlers touch melhorados
+let touchElement = null;
+let touchStartTime = 0;
+let touchMoved = false;
+
+function handleTouchStart(e) {
+    touchElement = this;
+    touchStartTime = Date.now();
+    touchMoved = false;
+
+    // Feedback visual imediato
+    this.classList.add('touch-active');
+
+    // Timer para long press
+    touchTimer = setTimeout(() => {
+        if (touchElement && !touchMoved) {
+            const numero = parseInt(touchElement.getAttribute('data-numero'));
+            const elemento = elementos.find(el => el.numero === numero);
+            if (elemento) {
+                mostrarInfo(elemento);
+            }
+        }
+        touchElement = null;
+    }, LONG_PRESS_DURATION);
+}
+
+function handleTouchMove(e) {
+    touchMoved = true;
+    if (touchTimer) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+    }
+    if (touchElement) {
+        touchElement.classList.remove('touch-active');
+        touchElement = null;
+    }
+}
+
+function handleTouchEnd(e) {
+    if (touchTimer) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+    }
+
+    // Se não houve movimento e o tempo foi curto, é um toque simples
+    if (!touchMoved && touchElement && (Date.now() - touchStartTime) < LONG_PRESS_DURATION) {
+        // Não fazer nada no toque simples - permitir scroll
+    }
+
+    if (touchElement) {
+        touchElement.classList.remove('touch-active');
+        touchElement = null;
+    }
+}
+
+function handleTouchCancel(e) {
+    if (touchTimer) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+    }
+    if (touchElement) {
+        touchElement.classList.remove('touch-active');
+        touchElement = null;
+    }
+}
+
+function adicionarEspacosVazios() {
+    // Mesma lógica do seu código para espaços vazios
     for (let col = 4; col <= 18; col++) {
         const espaco = document.createElement("div");
         espaco.classList.add("elemento", "espaco-vazio");
         espaco.style.gridColumn = col;
         espaco.style.gridRow = 6;
-        espaco.style.opacity = "0";
-        espaco.style.pointerEvents = "none";
-        espaco.style.border = "none";
-        espaco.style.background = "transparent";
-        espaco.style.boxShadow = "none";
-        tabela.appendChild(espaco);
+        tabelaDiv.appendChild(espaco);
     }
-    
-    // Linha 7 (período 7) - colunas 4 a 18 ficam vazias
+
     for (let col = 4; col <= 18; col++) {
         const espaco = document.createElement("div");
         espaco.classList.add("elemento", "espaco-vazio");
         espaco.style.gridColumn = col;
         espaco.style.gridRow = 7;
-        espaco.style.opacity = "0";
-        espaco.style.pointerEvents = "none";
-        espaco.style.border = "none";
-        espaco.style.background = "transparent";
-        espaco.style.boxShadow = "none";
-        tabela.appendChild(espaco);
+        tabelaDiv.appendChild(espaco);
     }
-    
-    // COMPLETAR LINHA 8 (lantanídeos) com espaços vazios nas colunas 16-18
+
     for (let col = 16; col <= 18; col++) {
         const espaco = document.createElement("div");
         espaco.classList.add("elemento", "espaco-vazio");
         espaco.style.gridColumn = col;
         espaco.style.gridRow = 8;
-        espaco.style.opacity = "0";
-        espaco.style.pointerEvents = "none";
-        espaco.style.border = "none";
-        espaco.style.background = "transparent";
-        espaco.style.boxShadow = "none";
-        tabela.appendChild(espaco);
+        tabelaDiv.appendChild(espaco);
     }
-    
-    // COMPLETAR LINHA 9 (actinídeos) com espaços vazios nas colunas 16-18
+
     for (let col = 16; col <= 18; col++) {
         const espaco = document.createElement("div");
         espaco.classList.add("elemento", "espaco-vazio");
         espaco.style.gridColumn = col;
         espaco.style.gridRow = 9;
-        espaco.style.opacity = "0";
-        espaco.style.pointerEvents = "none";
-        espaco.style.border = "none";
-        espaco.style.background = "transparent";
-        espaco.style.boxShadow = "none";
-        tabela.appendChild(espaco);
+        tabelaDiv.appendChild(espaco);
     }
-    
-    // Adicionar LABELS para identificar as séries
-    const labelLantanideos = document.createElement("div");
-    labelLantanideos.style.gridColumn = "1/3";
-    labelLantanideos.style.gridRow = "8";
-    labelLantanideos.style.color = "#d4a5a5";
-    labelLantanideos.style.fontSize = "10px";
-    labelLantanideos.style.display = "flex";
-    labelLantanideos.style.alignItems = "center";
-    labelLantanideos.style.justifyContent = "center";
-    labelLantanideos.style.textShadow = "0 0 5px #d4a5a5";
-    labelLantanideos.style.fontWeight = "bold";
-    tabela.appendChild(labelLantanideos);
-    
-    const labelActinideos = document.createElement("div");
-    labelActinideos.style.gridColumn = "1/3";
-    labelActinideos.style.gridRow = "9";
-    labelActinideos.style.color = "#9b5de5";
-    labelActinideos.style.fontSize = "10px";
-    labelActinideos.style.display = "flex";
-    labelActinideos.style.alignItems = "center";
-    labelActinideos.style.justifyContent = "center";
-    labelActinideos.style.textShadow = "0 0 5px #9b5de5";
-    labelActinideos.style.fontWeight = "bold";
-    tabela.appendChild(labelActinideos);
-    
-    // DEBUG: Verificar no console
-    console.log("Total de elementos criados:", elementos.length);
-    console.log("Lutécio (71):", elementos.find(el => el.numero === 71));
-    console.log("Laurêncio (103):", elementos.find(el => el.numero === 103));
 }
 
-// Inicializar tabela
-criarElementos();
-
-// Alternar visualização compacta para mobile
+// Alternar visualização compacta
 if (toggleViewBtn) {
     toggleViewBtn.addEventListener('click', () => {
         compactMode = !compactMode;
         if (compactMode) {
-            tabela.classList.add('compact-view');
-            toggleViewBtn.textContent = 'Visualização Normal';
+            tabelaDiv.classList.add('compact-view');
+            toggleViewBtn.textContent = '📊 Normal';
         } else {
-            tabela.classList.remove('compact-view');
-            toggleViewBtn.textContent = 'Visualização Compacta';
+            tabelaDiv.classList.remove('compact-view');
+            toggleViewBtn.textContent = '🔍 Compactar';
         }
     });
 }
 
-// Função para mostrar informações do elemento
+// Mostrar informações do elemento
 function mostrarInfo(el) {
-    // Preencher dados
     document.getElementById("nome-elemento").textContent = el.nome;
     document.getElementById("simbolo").textContent = el.simbolo;
     document.getElementById("numero").textContent = el.numero;
@@ -2023,13 +2029,11 @@ function mostrarInfo(el) {
     document.getElementById("neutrons").textContent = el.neutrons || "—";
     document.getElementById("eletrons").textContent = el.eletrons;
     document.getElementById("config").textContent = el.config;
+    document.getElementById("familia").textContent = el.familia || el.categoria;
     document.getElementById("historia").textContent = el.historia;
     document.getElementById("reacoes").textContent = el.reacoes;
-    
-    // Mostrar info
+
     infoDiv.classList.remove("hidden");
-    
-    // Prevenir scroll do body
     document.body.style.overflow = 'hidden';
 }
 
@@ -2041,48 +2045,54 @@ function fecharInfo() {
 
 fecharBtn.addEventListener('click', fecharInfo);
 
-// Fechar ao clicar fora
 infoDiv.addEventListener('click', (e) => {
     if (e.target === infoDiv) {
         fecharInfo();
     }
 });
 
-// Suporte a gestos de swipe para fechar em mobile
-if (deviceInfo.isMobile) {
-    let touchStartY = 0;
-    let touchStartX = 0;
-    
-    infoDiv.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-        touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-    
-    infoDiv.addEventListener('touchmove', (e) => {
-        const touchY = e.touches[0].clientY;
-        const touchX = e.touches[0].clientX;
-        const diffY = touchY - touchStartY;
-        const diffX = Math.abs(touchX - touchStartX);
-        
-        // Swipe para baixo (ignorar se for movimento horizontal)
-        if (diffY > 50 && diffX < 30) {
-            fecharInfo();
-        }
-    }, { passive: true });
-}
-
-// Suporte a tecla ESC
+// Fechar com ESC
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !infoDiv.classList.contains('hidden')) {
         fecharInfo();
     }
 });
 
-// Mensagem de boas-vindas
-console.log(`👋 Bem-vindo! Acessando de ${deviceInfo.device} (${deviceInfo.os})`);
+// Painel de famílias
+btnFamilias.addEventListener('click', () => {
+    painelFamilias.classList.remove('hidden');
+});
 
-// Toast de boas-vindas para mobile
+fecharFamilias.addEventListener('click', () => {
+    painelFamilias.classList.add('hidden');
+});
+
+painelFamilias.addEventListener('click', (e) => {
+    if (e.target === painelFamilias) {
+        painelFamilias.classList.add('hidden');
+    }
+});
+
+// Inicializar tabela
+criarElementos();
+
+// Aplicar cores nas famílias
+document.querySelectorAll('.familia-item').forEach(item => {
+    const cor = item.getAttribute('data-cor');
+    if (cor) {
+        item.style.borderLeftColor = cor;
+    }
+});
+
+// Mensagem de boas-vindas
+console.log(`🚀 App iniciado em modo: ${deviceInfo.device}`);
+
+// Toast de boas-vindas
 if (deviceInfo.isMobile) {
+    mostrarToast(`📱 Modo ${deviceInfo.device} ativado`);
+}
+
+function mostrarToast(mensagem) {
     const toast = document.createElement('div');
     toast.style.cssText = `
         position: fixed;
@@ -2094,13 +2104,13 @@ if (deviceInfo.isMobile) {
         padding: 10px 20px;
         border-radius: 25px;
         font-size: 14px;
-        z-index: 100;
+        z-index: 3000;
         border: 2px solid #00ffff;
         box-shadow: 0 0 20px #00ffff;
         text-shadow: 0 0 10px #00ffff;
         animation: slideUp 3s forwards;
     `;
-    toast.textContent = `📱 Modo ${deviceInfo.device} ativado`;
+    toast.textContent = mensagem;
     document.body.appendChild(toast);
     
     setTimeout(() => {
