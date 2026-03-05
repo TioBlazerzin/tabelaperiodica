@@ -19,7 +19,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
-    background: url('imagens/wallpaper.png') no-repeat center center fixed;
+    background: url('imagens/wallpaper.jpg') no-repeat center center fixed;
     background-size: cover;
     position: relative;
 }
