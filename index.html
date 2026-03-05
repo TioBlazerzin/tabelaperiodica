@@ -2,21 +2,179 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Tabela Periódica Interativa - Mobile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Química Interativa - Tabela & Estados</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>TABELA PERIÓDICA</h1>
-    
-    <!-- Botão para alternar visualização em mobile -->
-    <button id="toggleView" class="mobile-only">Alternar Visualização</button>
-    
-    <div id="tabela"></div>
+<!-- MENU PRINCIPAL -->
+<div id="menu-principal" class="menu-container">
+    <h1>🧪 QUÍMICA INTERATIVA 🧪</h1>
+    <div class="menu-botoes">
+        <button class="menu-btn" id="btn-tabela">
+            <span class="btn-emoji">🧬</span>
+            <span class="btn-texto">Tabela Periódica</span>
+        </button>
+        <button class="menu-btn" id="btn-estados">
+            <span class="btn-emoji">💧</span>
+            <span class="btn-texto">Estados da Matéria</span>
+        </button>
+    </div>
+    <div class="menu-footer">
+        <p>👆 Toque para começar</p>
+    </div>
 </div>
 
+<!-- TELA DA TABELA PERIÓDICA -->
+<div id="tela-tabela" class="tela hidden">
+    <div class="header">
+        <button class="btn-voltar" id="voltar-tabela">🔙 Voltar</button>
+        <h2>TABELA PERIÓDICA</h2>
+        <button id="toggleView" class="mobile-only">🔍 Compactar</button>
+    </div>
+
+    <!-- Área rolável da tabela -->
+    <div class="tabela-scroll" id="tabela-scroll">
+        <div id="tabela" class="tabela-grid"></div>
+    </div>
+
+    <!-- Botão para mostrar/ocultar informações das famílias -->
+    <button id="btn-familias" class="btn-familias">📚 Ver Famílias Químicas</button>
+
+    <!-- Painel de informações das famílias -->
+    <div id="painel-familias" class="painel-familias hidden">
+        <div class="familias-header">
+            <h3>Famílias da Tabela Periódica</h3>
+            <button id="fechar-familias" class="fechar-familias">✕</button>
+        </div>
+        <div class="familias-content">
+            <div class="familia-item" data-cor="#ffe66d">
+                <span class="familia-numero">1</span>
+                <span class="familia-nome">Metais Alcalinos</span>
+                <span class="familia-desc">Li, Na, K, Rb, Cs, Fr - Reagem violentamente com água</span>
+            </div>
+            <div class="familia-item" data-cor="#ff9f1c">
+                <span class="familia-numero">2</span>
+                <span class="familia-nome">Metais Alcalino-Terrosos</span>
+                <span class="familia-desc">Be, Mg, Ca, Sr, Ba, Ra - Menos reativos que os alcalinos</span>
+            </div>
+            <div class="familia-item" data-cor="#a8e6cf">
+                <span class="familia-numero">3-12</span>
+                <span class="familia-nome">Metais de Transição</span>
+                <span class="familia-desc">Formam íons coloridos, bons condutores</span>
+            </div>
+            <div class="familia-item" data-cor="#f9d56e">
+                <span class="familia-numero">13</span>
+                <span class="familia-nome">Grupo do Boro</span>
+                <span class="familia-desc">B, Al, Ga, In, Tl - Propriedades variadas</span>
+            </div>
+            <div class="familia-item" data-cor="#2ec4b6">
+                <span class="familia-numero">14</span>
+                <span class="familia-nome">Grupo do Carbono</span>
+                <span class="familia-desc">C, Si, Ge, Sn, Pb - Base da vida (carbono)</span>
+            </div>
+            <div class="familia-item" data-cor="#e71d36">
+                <span class="familia-numero">15</span>
+                <span class="familia-nome">Grupo do Nitrogênio</span>
+                <span class="familia-desc">N, P, As, Sb, Bi - Essenciais para a vida</span>
+            </div>
+            <div class="familia-item" data-cor="#4ecdc4">
+                <span class="familia-numero">16</span>
+                <span class="familia-nome">Calcogênios</span>
+                <span class="familia-desc">O, S, Se, Te, Po - Formam óxidos</span>
+            </div>
+            <div class="familia-item" data-cor="#ff6b6b">
+                <span class="familia-numero">17</span>
+                <span class="familia-nome">Halogênios</span>
+                <span class="familia-desc">F, Cl, Br, I, At - Muito reativos, formam sais</span>
+            </div>
+            <div class="familia-item" data-cor="#ff6b6b">
+                <span class="familia-numero">18</span>
+                <span class="familia-nome">Gases Nobres</span>
+                <span class="familia-desc">He, Ne, Ar, Kr, Xe, Rn - Quase inertes</span>
+            </div>
+            <div class="familia-item" data-cor="#d4a5a5">
+                <span class="familia-numero">*</span>
+                <span class="familia-nome">Lantanídeos</span>
+                <span class="familia-desc">57-71 - Terras raras, usados em ímãs</span>
+            </div>
+            <div class="familia-item" data-cor="#9b5de5">
+                <span class="familia-numero">**</span>
+                <span class="familia-nome">Actinídeos</span>
+                <span class="familia-desc">89-103 - Radioativos, usados em energia nuclear</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TELA DOS ESTADOS DA MATÉRIA -->
+<div id="tela-estados" class="tela hidden">
+    <div class="header">
+        <button class="btn-voltar" id="voltar-estados">🔙 Voltar</button>
+        <h2>ESTADOS DA MATÉRIA</h2>
+    </div>
+
+    <div class="estados-container">
+        <!-- Cards dos estados -->
+        <div class="estado-card" id="card-solido">
+            <div class="estado-emoji">🧊</div>
+            <h3>SÓLIDO</h3>
+            <p class="estado-desc">Forma e volume fixos. Partículas muito próximas e organizadas, vibrando em posições fixas.</p>
+            <div class="mudancas">
+                <div class="mudanca-item">🧊 → 💧 <span>Fusão</span></div>
+                <div class="mudanca-item">🧊 → 💨 <span>Sublimação</span></div>
+            </div>
+        </div>
+
+        <div class="estado-card" id="card-liquido">
+            <div class="estado-emoji">💧</div>
+            <h3>LÍQUIDO</h3>
+            <p class="estado-desc">Volume fixo, forma variável. Partículas próximas mas com liberdade de movimento.</p>
+            <div class="mudancas">
+                <div class="mudanca-item">💧 → 🧊 <span>Solidificação</span></div>
+                <div class="mudanca-item">💧 → 💨 <span>Vaporização</span></div>
+            </div>
+        </div>
+
+        <div class="estado-card" id="card-gasoso">
+            <div class="estado-emoji">💨</div>
+            <h3>GASOSO</h3>
+            <p class="estado-desc">Forma e volume variáveis. Partículas muito afastadas e em movimento rápido.</p>
+            <div class="mudancas">
+                <div class="mudanca-item">💨 → 🧊 <span>Ressublimação</span></div>
+                <div class="mudanca-item">💨 → 💧 <span>Condensação</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explicação adicional -->
+    <div class="explicacao-estados">
+        <h4>📌 Mudanças de Estado</h4>
+        <div class="mudancas-grid">
+            <div class="mudanca-explicacao">
+                <span class="mudanca-nome">Fusão:</span> Sólido → Líquido (aquecimento)
+            </div>
+            <div class="mudanca-explicacao">
+                <span class="mudanca-nome">Solidificação:</span> Líquido → Sólido (resfriamento)
+            </div>
+            <div class="mudanca-explicacao">
+                <span class="mudanca-nome">Vaporização:</span> Líquido → Gasoso (aquecimento)
+            </div>
+            <div class="mudanca-explicacao">
+                <span class="mudanca-nome">Condensação:</span> Gasoso → Líquido (resfriamento)
+            </div>
+            <div class="mudanca-explicacao">
+                <span class="mudanca-nome">Sublimação:</span> Sólido → Gasoso (direto)
+            </div>
+            <div class="mudanca-explicacao">
+                <span class="mudanca-nome">Ressublimação:</span> Gasoso → Sólido (direto)
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Janela de informações do elemento -->
 <div id="info" class="hidden">
     <div class="info-box">
         <span id="fechar">×</span>
@@ -27,9 +185,10 @@
             <p><strong>Prótons:</strong> <span id="protons"></span></p>
             <p><strong>Nêutrons:</strong> <span id="neutrons"></span></p>
             <p><strong>Elétrons:</strong> <span id="eletrons"></span></p>
-            <p><strong>Configuração Eletrônica:</strong> <span id="config"></span></p>
+            <p><strong>Configuração:</strong> <span id="config"></span></p>
+            <p><strong>Família:</strong> <span id="familia"></span></p>
             <p><strong>História:</strong> <span id="historia"></span></p>
-            <p><strong>Reações Químicas:</strong> <span id="reacoes"></span></p>
+            <p><strong>Reações:</strong> <span id="reacoes"></span></p>
         </div>
     </div>
 </div>
